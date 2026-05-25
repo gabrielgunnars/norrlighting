@@ -4,6 +4,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Projects", to: "/projects" },
+  { label: "Showcase", to: "/showcase" },
   { label: "Team", to: "/team" },
   { label: "Studio", to: "/studio" },
 ];

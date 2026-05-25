@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { ArrowUpRight } from "lucide-react";
 import { useData, type Project } from "../data/store";
 
 function ProjectCard({
@@ -160,6 +161,33 @@ export function Projects() {
           );
         })}
       </div>
+
+      {/* ── "Experience the work" showcase entry ── */}
+      <Link
+        to="/showcase"
+        className="group block border-t border-b border-[rgba(240,237,230,0.07)] bg-[#0A0A09] hover:bg-[#0d0d0c] transition-colors duration-500"
+        style={{ paddingTop: "5rem", paddingBottom: "5rem", paddingLeft: "clamp(2rem,6vw,6rem)", paddingRight: "clamp(2rem,6vw,6rem)" }}
+      >
+        <div className="max-w-screen-xl mx-auto flex items-end justify-between gap-8">
+          <div>
+            <p className="font-['Space_Mono'] text-[8px] tracking-[0.4em] uppercase text-[#C8963E] mb-4">
+              Cinematic Experience
+            </p>
+            <h2
+              className="font-['Libre_Bodoni'] italic font-normal text-[#F0EDE6]"
+              style={{ fontSize: "clamp(2rem, 5vw, 4rem)", lineHeight: 0.95 }}
+            >
+              Experience the work
+            </h2>
+          </div>
+          <div className="flex items-center gap-3 shrink-0 font-['Instrument_Sans'] text-sm text-[#C8963E] group-hover:gap-5 transition-all duration-300">
+            <span className="border-b border-[#C8963E]/40 pb-0.5 group-hover:border-[#C8963E] transition-colors">
+              Enter Showcase
+            </span>
+            <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+          </div>
+        </div>
+      </Link>
     </>
   );
 }

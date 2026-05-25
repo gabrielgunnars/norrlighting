@@ -14,6 +14,7 @@ import { AdminContent } from "./pages/admin/AdminContent";
 import { AdminAwards } from "./pages/admin/AdminAwards";
 import { ProjectDetail } from "./pages/ProjectDetail";
 import { Studio } from "./pages/Studio";
+import { Showcase } from "./pages/Showcase";
 import { DataProvider } from "./data/store";
 
 export function App() {
@@ -26,6 +27,7 @@ export function App() {
           <Route path="projects/:slug" element={<ProjectDetail />} />
           <Route path="team" element={<Team />} />
           <Route path="studio" element={<Studio />} />
+          <Route path="showcase" element={<Showcase />} />
         </Route>
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin" element={<AdminRoot />}>
