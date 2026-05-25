@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useParams, useNavigate, Link } from "react-router";
 import { ArrowLeft, Upload, X, Star, Loader2, AlertCircle } from "lucide-react";
 import { useData, makeSlug, type Project } from "../../data/store";
+import { compressImage } from "../../utils/imageUtils";
 
 type FormData = {
   name: string;
@@ -32,14 +33,6 @@ const CATEGORIES = [
   "Commercial & Hospitality",
   "Residential",
 ];
-
-function readFile(file: File): Promise<string> {
-  return new Promise((resolve) => {
-    const r = new FileReader();
-    r.onload = (e) => resolve(e.target!.result as string);
-    r.readAsDataURL(file);
-  });
-}
 
 function FieldLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -117,7 +110,7 @@ export function AdminProjectForm() {
   const addImages = useCallback(async (files: FileList | File[]) => {
     const arr = Array.from(files).filter((f) => f.type.startsWith("image/"));
     if (!arr.length) return;
-    const results = await Promise.all(arr.map(readFile));
+    const results = await Promise.all(arr.map((f) => compressImage(f)));
     setForm((prev) => ({ ...prev, images: [...prev.images, ...results] }));
   }, []);
 

@@ -1,14 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import { Plus, Edit2, Trash2, X, Check, Upload } from "lucide-react";
 import { useData, type TeamMember } from "../../data/store";
-
-function readFile(file: File): Promise<string> {
-  return new Promise((resolve) => {
-    const r = new FileReader();
-    r.onload = (e) => resolve(e.target!.result as string);
-    r.readAsDataURL(file);
-  });
-}
+import { compressImage } from "../../utils/imageUtils";
 
 function PhotoUpload({
   photo,
@@ -24,7 +17,7 @@ function PhotoUpload({
 
   const handleFile = useCallback(async (file: File) => {
     if (!file.type.startsWith("image/")) return;
-    const src = await readFile(file);
+    const src = await compressImage(file);
     onChange(src);
   }, [onChange]);
 

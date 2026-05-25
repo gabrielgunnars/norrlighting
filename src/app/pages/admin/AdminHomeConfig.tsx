@@ -1,4 +1,5 @@
 import { useRef, useState, useCallback } from "react";
+import { compressImage } from "../../utils/imageUtils";
 import { Upload, X, Check, Film } from "lucide-react";
 import { useData } from "../../data/store";
 import defaultHero from "../../../imports/ChatGPT_Image_May_9__2026__12_30_21_PM.png";
@@ -12,14 +13,6 @@ function SectionDivider({ children }: { children: React.ReactNode }) {
       </p>
     </div>
   );
-}
-
-function readFile(file: File): Promise<string> {
-  return new Promise((resolve) => {
-    const r = new FileReader();
-    r.onload = (e) => resolve(e.target!.result as string);
-    r.readAsDataURL(file);
-  });
 }
 
 export function AdminHomeConfig() {
@@ -38,7 +31,7 @@ export function AdminHomeConfig() {
   // ── Hero image ────────────────────────────────────────────
   const handleHeroFile = useCallback(async (file: File) => {
     if (!file.type.startsWith("image/")) return;
-    const src = await readFile(file);
+    const src = await compressImage(file);
     updateSiteConfig({ heroImage: src, heroVideo: null });
     showSaved();
   }, []);
@@ -65,7 +58,11 @@ export function AdminHomeConfig() {
   // ── Hero video ────────────────────────────────────────────
   const handleVideoFile = useCallback(async (file: File) => {
     if (!file.type.startsWith("video/")) return;
-    const src = await readFile(file);
+    const src = await new Promise<string>((resolve) => {
+      const r = new FileReader();
+      r.onload = (e) => resolve(e.target!.result as string);
+      r.readAsDataURL(file);
+    });
     updateSiteConfig({ heroVideo: src, heroImage: null });
     showSaved();
   }, []);
@@ -104,7 +101,7 @@ export function AdminHomeConfig() {
   const handleIgUpload = async (idx: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const src = await readFile(file);
+    const src = await compressImage(file);
     const next = [...igImages];
     next[idx] = src;
     updateSiteConfig({ instagramImages: next });
