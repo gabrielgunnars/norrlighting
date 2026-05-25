@@ -34,6 +34,7 @@ export type Award = {
   id: string;
   image: string | null;
   name: string;
+  result: string;
   subtext: string;
 };
 

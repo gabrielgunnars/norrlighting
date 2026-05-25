@@ -237,48 +237,40 @@ function AwardsSection() {
   if (awards.length === 0) return null;
 
   return (
-    <section className="border-t border-[rgba(240,237,230,0.06)]">
-      <div
-        className="max-w-screen-xl mx-auto site-px"
-        style={{ paddingTop: "6rem", paddingBottom: "6rem" }}
-      >
-        <div className="flex items-center gap-3 mb-10 reveal">
-          <div className="w-5 bg-[#C8963E]" style={{ height: "1.5px" }} />
-          <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
-            Awards & Recognition
-          </span>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <section className="border-t border-b border-[rgba(240,237,230,0.06)]">
+      <div className="max-w-screen-xl mx-auto site-px" style={{ paddingTop: "3.5rem", paddingBottom: "3.5rem" }}>
+        <p className="font-['Space_Mono'] text-[8px] tracking-[0.35em] text-[#C8963E] uppercase mb-8">
+          Recognition
+        </p>
+        <div
+          className="grid"
+          style={{ gridTemplateColumns: `repeat(${Math.min(awards.length, 4)}, 1fr)` }}
+        >
           {awards.map((award, i) => (
             <div
               key={award.id}
-              className="reveal relative overflow-hidden bg-[#111110]"
-              style={{ aspectRatio: "4/3", transitionDelay: `${i * 60}ms` }}
+              className="reveal flex flex-col justify-between py-2"
+              style={{
+                paddingLeft: i === 0 ? 0 : "2rem",
+                paddingRight: i === awards.length - 1 ? 0 : "2rem",
+                borderLeft: i === 0 ? "none" : "1px solid rgba(240,237,230,0.07)",
+                transitionDelay: `${i * 60}ms`,
+              }}
             >
-              {award.image ? (
-                <img
-                  src={award.image}
-                  alt={award.name}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-['Space_Mono'] text-[8px] tracking-wider text-[#2a2a28]">
-                    No image
-                  </span>
-                </div>
-              )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-4">
-                <p className="font-['Libre_Bodoni'] italic text-sm text-[#F0EDE6] leading-tight">
+              <div>
+                <p className="font-['Space_Mono'] text-[8px] tracking-[0.3em] uppercase text-[#4a4a48] mb-4 leading-relaxed">
                   {award.name}
                 </p>
+                <h3 className="font-['Libre_Bodoni'] italic text-[clamp(1.4rem,2.2vw,2.2rem)] text-[#F0EDE6] font-normal leading-[1.05]">
+                  {award.result || "Winner"}
+                </h3>
                 {award.subtext && (
-                  <p className="font-['Space_Mono'] text-[7px] tracking-[0.25em] uppercase text-[#C8963E] mt-1.5">
+                  <p className="font-['Space_Mono'] text-[8px] tracking-[0.25em] uppercase text-[#4a4a48] mt-3 leading-relaxed">
                     {award.subtext}
                   </p>
                 )}
               </div>
+              <div className="w-6 bg-[#C8963E] mt-6" style={{ height: "1.5px" }} />
             </div>
           ))}
         </div>
