@@ -274,6 +274,9 @@ function AwardsSection() {
             </div>
           ))}
         </div>
+        <p className="font-['Instrument_Sans'] text-sm font-light text-[#4a4a48] mt-10 text-center leading-relaxed">
+          Internationally recognized for atmospheric lighting in Icelandic nature and architectural environments.
+        </p>
       </div>
     </section>
   );
