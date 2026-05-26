@@ -1,12 +1,13 @@
 /**
  * Compress and resize an image file before storing.
- * Resizes to maxWidth (default 1920px) and encodes as JPEG at given quality.
- * This keeps localStorage usage manageable even for large photos.
+ * Resizes to maxWidth (default 2560px) and encodes as JPEG at given quality.
+ * 2560px covers retina MacBook/4K displays at full-screen; quality 0.92 avoids
+ * visible JPEG artefacts on high-contrast architectural photography.
  */
 export function compressImage(
   file: File,
-  maxWidth = 1920,
-  quality = 0.82
+  maxWidth = 2560,
+  quality = 0.92
 ): Promise<string> {
   return new Promise((resolve, reject) => {
     const img = new Image();
