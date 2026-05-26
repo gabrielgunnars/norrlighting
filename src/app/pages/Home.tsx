@@ -103,80 +103,129 @@ function Hero() {
   );
 }
 
-function ProjectCard({ p, index }: { p: Project; index: number }) {
-  const { getCoverImage } = useData();
-  const [hovered, setHovered] = useState(false);
-  const cover = getCoverImage(p);
-
-  return (
-    <Link
-      to={`/projects/${p.slug}`}
-      className={`reveal delay-${(index + 1) * 100} relative overflow-hidden cursor-pointer group block`}
-      style={{ aspectRatio: "3/4" }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <img
-        src={cover}
-        alt={p.name}
-        className={`w-full h-full object-cover transition-transform duration-[1000ms] ease-out ${hovered ? "scale-[1.06]" : "scale-100"}`}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A09]/85 via-transparent to-transparent" />
-
-      <div className="absolute top-4 left-4">
-        <span className="font-['Inter'] font-[200] text-[8px] tracking-[0.3em] uppercase text-[#a09880]">
-          {p.location}
-        </span>
-      </div>
-
-      <div className="absolute bottom-0 left-0 right-0 p-5">
-        <p className="font-['Space_Mono'] text-[8px] tracking-[0.25em] uppercase text-[#C8963E] mb-2">
-          {p.category} · {p.year}
-        </p>
-        <h3 className="font-['Libre_Bodoni'] italic text-lg font-normal text-[#F0EDE6] leading-tight">
-          {p.name}
-        </h3>
-      </div>
-
-      <div
-        className={`absolute top-4 right-4 w-7 h-7 border border-[#C8963E]/50 flex items-center justify-center transition-opacity duration-300 ${hovered ? "opacity-100" : "opacity-0"}`}
-      >
-        <ArrowUpRight size={11} className="text-[#C8963E]" />
-      </div>
-    </Link>
-  );
-}
-
 function FeaturedProjects() {
-  const { projects, siteConfig } = useData();
+  const { projects, siteConfig, getCoverImage } = useData();
+  const [hovered, setHovered] = useState<number | null>(null);
 
   const featured = siteConfig.featuredProjectIds
     .map((id) => projects.find((p) => p.id === id))
     .filter((p): p is Project => Boolean(p));
 
-  // Fallback: show first 3 projects if nothing is configured
   const display = featured.length > 0 ? featured : projects.slice(0, 3);
+  const [p0, p1, p2] = display;
+
+  const Overlay = ({ p, large }: { p: Project; large?: boolean }) => (
+    <>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A09]/80 via-[#0A0A09]/10 to-transparent" />
+      <div className={`absolute ${large ? "top-7 left-8" : "top-5 left-6"}`}>
+        <span className="font-['Space_Mono'] text-[8px] tracking-[0.3em] uppercase text-white/60">
+          {p.category}
+        </span>
+      </div>
+      <div className={`absolute ${large ? "bottom-10 left-8 right-8" : "bottom-6 left-6 right-6"}`}>
+        <h3 className={`font-['Libre_Bodoni'] italic font-normal text-white leading-tight mb-2 ${large ? "text-4xl lg:text-5xl" : "text-2xl"}`}>
+          {p.name}
+        </h3>
+        <p className="font-['Space_Mono'] text-[8px] tracking-[0.25em] uppercase text-white/50">
+          {p.location}
+        </p>
+      </div>
+    </>
+  );
 
   return (
-    <section id="projects" className="max-w-screen-xl mx-auto site-px" style={{ paddingTop: "10rem", paddingBottom: "10rem" }}>
-      <div className="flex items-center justify-between mb-16 reveal">
-        <div className="flex items-center gap-3">
-          <div className="w-5 bg-[#C8963E]" style={{ height: "1.5px" }} />
-          <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
-            Selected Work
-          </span>
+    <section id="projects" style={{ paddingTop: "8rem", paddingBottom: "8rem" }}>
+      {/* Header — constrained */}
+      <div className="max-w-screen-xl mx-auto site-px">
+        <div className="flex items-center justify-between mb-10 reveal">
+          <div className="flex items-center gap-3">
+            <div className="w-5 bg-[#C8963E]" style={{ height: "1.5px" }} />
+            <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
+              Selected Work
+            </span>
+          </div>
+          <Link
+            to="/projects"
+            className="hidden sm:inline-flex items-center gap-1.5 font-['Inter'] font-[200] text-[9px] tracking-[0.25em] uppercase text-[#6a6460] hover:text-[#F0EDE6] transition-colors"
+          >
+            All projects <ArrowUpRight size={10} />
+          </Link>
         </div>
-        <Link
-          to="/projects"
-          className="hidden sm:inline-flex items-center gap-1.5 font-['Inter'] font-[200] text-[9px] tracking-[0.25em] uppercase text-[#6a6460] hover:text-[#F0EDE6] transition-colors"
-        >
-          All projects <ArrowUpRight size={10} />
-        </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {/* Desktop: full-bleed asymmetric grid */}
+      <div
+        className="hidden md:grid reveal"
+        style={{
+          gridTemplateColumns: "1.35fr 1fr",
+          gridTemplateRows: "1fr 1fr",
+          height: "88vh",
+        }}
+      >
+        {p0 && (
+          <Link
+            to={`/projects/${p0.slug}`}
+            className="relative overflow-hidden group"
+            style={{ gridRow: "1 / 3" }}
+            onMouseEnter={() => setHovered(0)}
+            onMouseLeave={() => setHovered(null)}
+          >
+            <img
+              src={getCoverImage(p0)}
+              alt={p0.name}
+              className={`w-full h-full object-cover transition-transform duration-[1200ms] ease-out ${hovered === 0 ? "scale-[1.04]" : "scale-100"}`}
+            />
+            <Overlay p={p0} large />
+          </Link>
+        )}
+        {p1 && (
+          <Link
+            to={`/projects/${p1.slug}`}
+            className="relative overflow-hidden group"
+            onMouseEnter={() => setHovered(1)}
+            onMouseLeave={() => setHovered(null)}
+          >
+            <img
+              src={getCoverImage(p1)}
+              alt={p1.name}
+              className={`w-full h-full object-cover transition-transform duration-[1200ms] ease-out ${hovered === 1 ? "scale-[1.04]" : "scale-100"}`}
+            />
+            <Overlay p={p1} />
+          </Link>
+        )}
+        {p2 && (
+          <Link
+            to={`/projects/${p2.slug}`}
+            className="relative overflow-hidden group"
+            onMouseEnter={() => setHovered(2)}
+            onMouseLeave={() => setHovered(null)}
+          >
+            <img
+              src={getCoverImage(p2)}
+              alt={p2.name}
+              className={`w-full h-full object-cover transition-transform duration-[1200ms] ease-out ${hovered === 2 ? "scale-[1.04]" : "scale-100"}`}
+            />
+            <Overlay p={p2} />
+          </Link>
+        )}
+      </div>
+
+      {/* Mobile: stacked full-bleed */}
+      <div className="md:hidden flex flex-col reveal">
         {display.map((p, i) => (
-          <ProjectCard key={p.id} p={p} index={i} />
+          <Link
+            key={p.id}
+            to={`/projects/${p.slug}`}
+            className="relative overflow-hidden group"
+            style={{ aspectRatio: i === 0 ? "3/4" : "4/3" }}
+          >
+            <img
+              src={getCoverImage(p)}
+              alt={p.name}
+              className="w-full h-full object-cover"
+            />
+            <Overlay p={p} large={i === 0} />
+          </Link>
         ))}
       </div>
     </section>
