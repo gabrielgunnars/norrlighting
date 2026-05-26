@@ -163,8 +163,13 @@ export function AdminProjectForm() {
         await createProject(data);
       }
       navigate("/admin/projects");
-    } catch {
-      setError("Save failed — check your connection and try again.");
+    } catch (e) {
+      console.error("[Norrlighting] Save failed:", e);
+      // Show the actual Supabase error message so we can diagnose
+      const supaErr = e as { message?: string; details?: string; hint?: string; code?: string };
+      const msg = supaErr?.message ?? (e instanceof Error ? e.message : "Unknown error");
+      const hint = supaErr?.hint ? ` (${supaErr.hint})` : "";
+      setError(`Save failed: ${msg}${hint}`);
       setSaving(false);
     }
   };

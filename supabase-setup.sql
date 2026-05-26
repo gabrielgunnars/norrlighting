@@ -73,3 +73,11 @@ create policy "public_all" on site_content for all to anon using (true) with che
 -- Create this manually in the Supabase dashboard:
 --   Storage → New bucket → Name: "media" → toggle Public ON → Create
 -- (Cannot be created via SQL)
+
+-- ── Storage policies (run these AFTER creating the bucket) ───────────────────
+-- Allow the anon key to read, upload, update, and delete files in the media bucket.
+-- Without these, image/video uploads from the admin will be rejected (403).
+create policy "media_public_read"   on storage.objects for select to anon using (bucket_id = 'media');
+create policy "media_public_insert" on storage.objects for insert to anon with check (bucket_id = 'media');
+create policy "media_public_update" on storage.objects for update to anon using (bucket_id = 'media') with check (bucket_id = 'media');
+create policy "media_public_delete" on storage.objects for delete to anon using (bucket_id = 'media');

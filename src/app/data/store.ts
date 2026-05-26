@@ -377,7 +377,8 @@ export function DataProvider({ children }: { children: ReactNode }) {
           setProjects(projRes.data.map(dbToProject));
         } else {
           const seeded = buildSeedProjects();
-          await supabase.from("projects").insert(seeded.map(projectToDb));
+          const seedRes = await supabase.from("projects").insert(seeded.map(projectToDb));
+          if (seedRes.error) console.error("[Norrlighting] projects seed error:", seedRes.error);
           setProjects(seeded);
         }
 
@@ -446,7 +447,10 @@ export function DataProvider({ children }: { children: ReactNode }) {
     const { error } = await supabase
       .from("projects")
       .upsert(projectToDb(resolved));
-    if (error) throw error;
+    if (error) {
+      console.error("[Norrlighting] projects upsert error:", error);
+      throw error;
+    }
 
     setProjects((prev) =>
       prev.some((p) => p.id === resolved.id)
