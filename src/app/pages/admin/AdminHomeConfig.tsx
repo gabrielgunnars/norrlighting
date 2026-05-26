@@ -1,6 +1,7 @@
 import { useRef, useState, useCallback } from "react";
 import { compressImage } from "../../utils/imageUtils";
-import { Upload, X, Check, Film } from "lucide-react";
+import { uploadFile } from "../../lib/storage";
+import { Upload, X, Check, Film, Loader2 } from "lucide-react";
 import { useData } from "../../data/store";
 import defaultHero from "../../../imports/ChatGPT_Image_May_9__2026__12_30_21_PM.png";
 
@@ -18,6 +19,7 @@ function SectionDivider({ children }: { children: React.ReactNode }) {
 export function AdminHomeConfig() {
   const { projects, siteConfig, updateSiteConfig, getCoverImage } = useData();
   const [flashSaved, setFlashSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
   const heroRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLInputElement>(null);
   const [heroDragOver, setHeroDragOver] = useState(false);
@@ -28,13 +30,28 @@ export function AdminHomeConfig() {
     setTimeout(() => setFlashSaved(false), 2500);
   };
 
-  // ── Hero image ────────────────────────────────────────────
+  const withSaving = async (fn: () => Promise<void>) => {
+    setSaving(true);
+    try {
+      await fn();
+      showSaved();
+    } catch (e) {
+      console.error("Save failed:", e);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  // ── Hero image ─────────────────────────────────────────────────────────
   const handleHeroFile = useCallback(async (file: File) => {
     if (!file.type.startsWith("image/")) return;
-    const src = await compressImage(file);
-    updateSiteConfig({ heroImage: src, heroVideo: null });
-    showSaved();
-  }, []);
+    await withSaving(async () => {
+      const src = await compressImage(file);
+      await updateSiteConfig({ heroImage: src, heroVideo: null });
+    });
+    if (heroRef.current) heroRef.current.value = "";
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updateSiteConfig]);
 
   const handleHeroUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -48,24 +65,26 @@ export function AdminHomeConfig() {
     if (file) handleHeroFile(file);
   };
 
-  const resetHero = () => {
-    updateSiteConfig({ heroImage: null, heroVideo: null });
+  const resetHero = async () => {
+    await withSaving(async () => {
+      await updateSiteConfig({ heroImage: null, heroVideo: null });
+    });
     if (heroRef.current) heroRef.current.value = "";
     if (videoRef.current) videoRef.current.value = "";
-    showSaved();
   };
 
-  // ── Hero video ────────────────────────────────────────────
+  // ── Hero video ─────────────────────────────────────────────────────────
+  // Video is uploaded directly to Supabase Storage (too large for base64)
   const handleVideoFile = useCallback(async (file: File) => {
     if (!file.type.startsWith("video/")) return;
-    const src = await new Promise<string>((resolve) => {
-      const r = new FileReader();
-      r.onload = (e) => resolve(e.target!.result as string);
-      r.readAsDataURL(file);
+    await withSaving(async () => {
+      const ext = file.name.split(".").pop() ?? "mp4";
+      const url = await uploadFile(file, `config/hero-${Date.now()}.${ext}`);
+      await updateSiteConfig({ heroVideo: url, heroImage: null });
     });
-    updateSiteConfig({ heroVideo: src, heroImage: null });
-    showSaved();
-  }, []);
+    if (videoRef.current) videoRef.current.value = "";
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updateSiteConfig]);
 
   const handleVideoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -79,20 +98,21 @@ export function AdminHomeConfig() {
     if (file) handleVideoFile(file);
   };
 
-  // ── Featured projects ─────────────────────────────────────
+  // ── Featured projects ──────────────────────────────────────────────────
   const featuredIds: string[] = Array.from(
     { length: 3 },
     (_, i) => siteConfig.featuredProjectIds[i] ?? ""
   );
 
-  const setFeatured = (slot: number, projectId: string) => {
+  const setFeatured = async (slot: number, projectId: string) => {
     const next = [...featuredIds];
     next[slot] = projectId;
-    updateSiteConfig({ featuredProjectIds: next.filter(Boolean) });
-    showSaved();
+    await withSaving(async () => {
+      await updateSiteConfig({ featuredProjectIds: next.filter(Boolean) });
+    });
   };
 
-  // ── Instagram grid ────────────────────────────────────────
+  // ── Instagram grid ─────────────────────────────────────────────────────
   const igImages: string[] = Array.from(
     { length: 6 },
     (_, i) => siteConfig.instagramImages[i] ?? ""
@@ -101,18 +121,20 @@ export function AdminHomeConfig() {
   const handleIgUpload = async (idx: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const src = await compressImage(file);
-    const next = [...igImages];
-    next[idx] = src;
-    updateSiteConfig({ instagramImages: next });
-    showSaved();
+    await withSaving(async () => {
+      const src = await compressImage(file);
+      const next = [...igImages];
+      next[idx] = src;
+      await updateSiteConfig({ instagramImages: next });
+    });
   };
 
-  const removeIg = (idx: number) => {
+  const removeIg = async (idx: number) => {
     const next = [...igImages];
     next[idx] = "";
-    updateSiteConfig({ instagramImages: next });
-    showSaved();
+    await withSaving(async () => {
+      await updateSiteConfig({ instagramImages: next });
+    });
   };
 
   return (
@@ -130,11 +152,14 @@ export function AdminHomeConfig() {
             Hero image, featured projects, and Instagram grid
           </p>
         </div>
-        {flashSaved && (
-          <span className="flex items-center gap-1.5 font-['Space_Mono'] text-[8px] tracking-wider text-green-400 mt-1">
-            <Check size={10} /> Saved
-          </span>
-        )}
+        <div className="flex items-center gap-2 mt-1">
+          {saving && <Loader2 size={12} className="text-[#C8963E] animate-spin" />}
+          {flashSaved && !saving && (
+            <span className="flex items-center gap-1.5 font-['Space_Mono'] text-[8px] tracking-wider text-green-400">
+              <Check size={10} /> Saved
+            </span>
+          )}
+        </div>
       </div>
 
       {/* ── Hero Image / Video ── */}
@@ -207,7 +232,7 @@ export function AdminHomeConfig() {
           )}
 
           <p className="font-['Instrument_Sans'] text-xs font-light text-[#3a3a38] mt-4">
-            Image: landscape, min 1920×1080px · Video: muted loop, under 20MB recommended
+            Image: landscape, min 1920×1080px · Video: muted loop, under 50MB recommended
           </p>
         </div>
       </section>
@@ -227,23 +252,15 @@ export function AdminHomeConfig() {
                 key={slot}
                 className="bg-[#0d0d0c] border border-[rgba(240,237,230,0.06)] p-4 sm:p-5 flex items-center gap-3 sm:gap-5"
               >
-                {/* Thumbnail */}
                 <div className="w-16 h-16 shrink-0 bg-[#111110] overflow-hidden">
                   {selected ? (
-                    <img
-                      src={getCoverImage(selected)}
-                      alt={selected.name}
-                      className="w-full h-full object-cover"
-                    />
+                    <img src={getCoverImage(selected)} alt={selected.name} className="w-full h-full object-cover" />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="font-['Space_Mono'] text-[10px] text-[#2a2a28]">
-                        {slot + 1}
-                      </span>
+                      <span className="font-['Space_Mono'] text-[10px] text-[#2a2a28]">{slot + 1}</span>
                     </div>
                   )}
                 </div>
-
                 <div className="flex-1 min-w-0">
                   <p className="font-['Inter'] font-[200] text-[9px] tracking-[0.25em] uppercase text-[#4a4a48] mb-2">
                     Slot {slot + 1}
@@ -256,9 +273,7 @@ export function AdminHomeConfig() {
                   >
                     <option value="">— None —</option>
                     {projects.map((p) => (
-                      <option key={p.id} value={p.id}>
-                        {p.name}
-                      </option>
+                      <option key={p.id} value={p.id}>{p.name}</option>
                     ))}
                   </select>
                 </div>
@@ -287,12 +302,7 @@ export function AdminHomeConfig() {
                     <label className="flex items-center gap-1 font-['Instrument_Sans'] text-[10px] text-[#C8963E] border border-[#C8963E]/50 px-2.5 py-1.5 cursor-pointer hover:bg-[rgba(200,150,62,0.15)] transition-colors">
                       <Upload size={9} />
                       Replace
-                      <input
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        onChange={(e) => handleIgUpload(idx, e)}
-                      />
+                      <input type="file" accept="image/*" className="hidden" onChange={(e) => handleIgUpload(idx, e)} />
                     </label>
                     <button
                       onClick={() => removeIg(idx)}
@@ -306,15 +316,8 @@ export function AdminHomeConfig() {
               ) : (
                 <label className="absolute inset-0 flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-[rgba(240,237,230,0.02)] transition-colors">
                   <Upload size={16} className="text-[#3a3a38]" />
-                  <span className="font-['Space_Mono'] text-[7px] tracking-wider text-[#3a3a38]">
-                    Image {idx + 1}
-                  </span>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={(e) => handleIgUpload(idx, e)}
-                  />
+                  <span className="font-['Space_Mono'] text-[7px] tracking-wider text-[#3a3a38]">Image {idx + 1}</span>
+                  <input type="file" accept="image/*" className="hidden" onChange={(e) => handleIgUpload(idx, e)} />
                 </label>
               )}
             </div>

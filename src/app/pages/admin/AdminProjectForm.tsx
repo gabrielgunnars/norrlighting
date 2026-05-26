@@ -138,7 +138,7 @@ export function AdminProjectForm() {
     return "";
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const err = validate();
     if (err) { setError(err); return; }
     setSaving(true);
@@ -155,13 +155,18 @@ export function AdminProjectForm() {
       coverIndex: form.coverIndex,
     };
 
-    if (isEdit && id) {
-      const existing = projects.find((p) => p.id === id)!;
-      saveProject({ ...existing, ...data });
-    } else {
-      createProject(data);
+    try {
+      if (isEdit && id) {
+        const existing = projects.find((p) => p.id === id)!;
+        await saveProject({ ...existing, ...data });
+      } else {
+        await createProject(data);
+      }
+      navigate("/admin/projects");
+    } catch {
+      setError("Save failed — check your connection and try again.");
+      setSaving(false);
     }
-    navigate("/admin/projects");
   };
 
   return (

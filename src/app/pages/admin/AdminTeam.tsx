@@ -176,13 +176,13 @@ export function AdminTeam() {
   const [editId, setEditId] = useState<string | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
-  const addMember = (data: Omit<TeamMember, "id">) => {
-    createTeamMember(data);
+  const addMember = async (data: Omit<TeamMember, "id">) => {
+    await createTeamMember(data);
     setShowForm(false);
   };
 
-  const updateMember = (id: string, data: Omit<TeamMember, "id">) => {
-    saveTeamMember({ ...data, id });
+  const updateMember = async (id: string, data: Omit<TeamMember, "id">) => {
+    await saveTeamMember({ ...data, id });
     setEditId(null);
   };
 
@@ -246,7 +246,7 @@ export function AdminTeam() {
                 </p>
                 <div className="flex gap-3 shrink-0">
                   <button
-                    onClick={() => { deleteTeamMember(m.id); setDeleteId(null); }}
+                    onClick={async () => { await deleteTeamMember(m.id); setDeleteId(null); }}
                     className="flex items-center gap-2 font-['Instrument_Sans'] text-sm bg-red-500/80 text-white px-5 py-2 hover:bg-red-500 transition-colors"
                   >
                     <Trash2 size={13} />

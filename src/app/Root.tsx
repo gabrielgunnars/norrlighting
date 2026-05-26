@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Outlet, Link, useLocation } from "react-router";
 import { ArrowUpRight, Menu, X } from "lucide-react";
+import { useData } from "./data/store";
 
 const navLinks = [
   { label: "Projects", to: "/projects" },
@@ -10,6 +11,7 @@ const navLinks = [
 ];
 
 export function Root() {
+  const { dataReady } = useData();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -121,7 +123,30 @@ export function Root() {
         </div>
       </header>
 
-      <Outlet />
+      {dataReady ? (
+        <Outlet />
+      ) : (
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="flex flex-col items-center gap-4">
+            <div
+              className="w-px bg-[#C8963E]"
+              style={{
+                height: "2.5rem",
+                animation: "loadingPulse 1.4s ease-in-out infinite",
+              }}
+            />
+            <span className="font-['Space_Mono'] text-[7px] tracking-[0.4em] uppercase text-[#3a3a38]">
+              Loading
+            </span>
+          </div>
+          <style>{`
+            @keyframes loadingPulse {
+              0%, 100% { opacity: 0.2; transform: scaleY(0.5); }
+              50% { opacity: 1; transform: scaleY(1); }
+            }
+          `}</style>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="border-t border-[rgba(240,237,230,0.05)] bg-[#0d0d0c]">

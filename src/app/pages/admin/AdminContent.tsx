@@ -59,8 +59,8 @@ export function AdminContent() {
   const [tab, setTab] = useState<"home" | "studio">("home");
   const [flashSaved, setFlashSaved] = useState(false);
 
-  const save = () => {
-    updateSiteContent(draft);
+  const save = async () => {
+    await updateSiteContent(draft);
     setFlashSaved(true);
     setTimeout(() => setFlashSaved(false), 2500);
   };

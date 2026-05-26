@@ -121,9 +121,9 @@ export function AdminProjects() {
   const { projects, deleteProject } = useData();
   const [toDelete, setToDelete] = useState<Project | null>(null);
 
-  const handleConfirmDelete = () => {
+  const handleConfirmDelete = async () => {
     if (toDelete) {
-      deleteProject(toDelete.id);
+      await deleteProject(toDelete.id);
       setToDelete(null);
     }
   };

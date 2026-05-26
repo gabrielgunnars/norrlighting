@@ -1,12 +1,20 @@
+import { useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { useData, type Award } from "../../data/store";
 
 function AwardRow({ award }: { award: Award }) {
   const { saveAward, deleteAward } = useData();
+  // Local state so typing doesn't trigger a DB write on every keystroke
+  const [fields, setFields] = useState({
+    name: award.name,
+    result: award.result,
+    subtext: award.subtext,
+  });
+
+  const persist = () => saveAward({ ...award, ...fields });
 
   return (
     <div className="bg-[#0d0d0c] border border-[rgba(240,237,230,0.06)] p-5 flex gap-5 items-start">
-      {/* Fields */}
       <div className="flex-1 min-w-0 grid grid-cols-3 gap-4">
         <div>
           <label className="font-['Inter'] font-[200] text-[9px] tracking-[0.25em] uppercase text-[#4a4a48] block mb-1.5">
@@ -15,8 +23,9 @@ function AwardRow({ award }: { award: Award }) {
           <input
             type="text"
             className="admin-input w-full"
-            value={award.name}
-            onChange={(e) => saveAward({ ...award, name: e.target.value })}
+            value={fields.name}
+            onChange={(e) => setFields((f) => ({ ...f, name: e.target.value }))}
+            onBlur={persist}
             placeholder="e.g. DARC Awards"
           />
         </div>
@@ -27,8 +36,9 @@ function AwardRow({ award }: { award: Award }) {
           <input
             type="text"
             className="admin-input w-full"
-            value={award.result}
-            onChange={(e) => saveAward({ ...award, result: e.target.value })}
+            value={fields.result}
+            onChange={(e) => setFields((f) => ({ ...f, result: e.target.value }))}
+            onBlur={persist}
             placeholder="e.g. Winner"
           />
         </div>
@@ -39,16 +49,18 @@ function AwardRow({ award }: { award: Award }) {
           <input
             type="text"
             className="admin-input w-full"
-            value={award.subtext}
-            onChange={(e) => saveAward({ ...award, subtext: e.target.value })}
+            value={fields.subtext}
+            onChange={(e) => setFields((f) => ({ ...f, subtext: e.target.value }))}
+            onBlur={persist}
             placeholder="e.g. Landscape Lighting"
           />
         </div>
       </div>
 
-      {/* Delete */}
       <button
-        onClick={() => { if (window.confirm("Delete this award?")) deleteAward(award.id); }}
+        onClick={async () => {
+          if (window.confirm("Delete this award?")) await deleteAward(award.id);
+        }}
         className="shrink-0 text-[#3a3a38] hover:text-red-400 transition-colors p-1 mt-0.5"
         title="Delete award"
       >
@@ -61,13 +73,12 @@ function AwardRow({ award }: { award: Award }) {
 export function AdminAwards() {
   const { awards, createAward } = useData();
 
-  const addAward = () => {
-    createAward({ image: null, name: "", result: "Winner", subtext: "" });
+  const addAward = async () => {
+    await createAward({ image: null, name: "", result: "Winner", subtext: "" });
   };
 
   return (
     <div style={{ maxWidth: "52rem", display: "flex", flexDirection: "column", gap: "2.5rem" }}>
-      {/* Header */}
       <div className="flex items-start justify-between">
         <div>
           <p className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-3">
@@ -77,7 +88,7 @@ export function AdminAwards() {
             Awards
           </h1>
           <p className="font-['Instrument_Sans'] text-sm font-light text-[#5a5a58] mt-1.5">
-            Recognition shown on the homepage. Each entry shows as a card with organisation, result, and category.
+            Recognition shown on the homepage. Fields are saved when you click out of them.
           </p>
         </div>
         <button
