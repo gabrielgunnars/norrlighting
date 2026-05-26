@@ -103,18 +103,8 @@ function Hero() {
   );
 }
 
-function FeaturedProjects() {
-  const { projects, siteConfig, getCoverImage } = useData();
-  const [hovered, setHovered] = useState<number | null>(null);
-
-  const featured = siteConfig.featuredProjectIds
-    .map((id) => projects.find((p) => p.id === id))
-    .filter((p): p is Project => Boolean(p));
-
-  const display = featured.length > 0 ? featured : projects.slice(0, 3);
-  const [p0, p1, p2] = display;
-
-  const Overlay = ({ p, large }: { p: Project; large?: boolean }) => (
+function ProjectOverlay({ p, large }: { p: Project; large?: boolean }) {
+  return (
     <>
       <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A09]/80 via-[#0A0A09]/10 to-transparent" />
       <div className={`absolute ${large ? "top-7 left-8" : "top-5 left-6"}`}>
@@ -132,41 +122,36 @@ function FeaturedProjects() {
       </div>
     </>
   );
+}
+
+function CategoryGrid({ display, flip }: { display: Project[]; flip?: boolean }) {
+  const { getCoverImage } = useData();
+  const [hovered, setHovered] = useState<number | null>(null);
+  const [p0, p1, p2] = display;
+
+  // flip=false: big image LEFT, stacked RIGHT
+  // flip=true:  stacked LEFT, big image RIGHT
+  const bigCol = flip ? "2" : "1";
+  const bigColSpan = flip
+    ? { gridColumn: "2", gridRow: "1 / 3" }
+    : { gridColumn: "1", gridRow: "1 / 3" };
+  const small1 = flip ? { gridColumn: "1", gridRow: "1" } : { gridColumn: "2", gridRow: "1" };
+  const small2 = flip ? { gridColumn: "1", gridRow: "2" } : { gridColumn: "2", gridRow: "2" };
+
+  const cols = flip ? "1fr 1.35fr" : "1.35fr 1fr";
 
   return (
-    <section id="projects" style={{ paddingTop: "8rem", paddingBottom: "8rem" }}>
-      {/* Header — constrained */}
-      <div className="max-w-screen-xl mx-auto site-px">
-        <div className="flex items-center justify-between mb-10 reveal">
-          <div className="flex items-center gap-3">
-            <div className="w-5 bg-[#C8963E]" style={{ height: "1.5px" }} />
-            <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
-              Selected Work
-            </span>
-          </div>
-          <Link
-            to="/projects"
-            className="hidden sm:inline-flex items-center gap-1.5 font-['Inter'] font-[200] text-[9px] tracking-[0.25em] uppercase text-[#6a6460] hover:text-[#F0EDE6] transition-colors"
-          >
-            All projects <ArrowUpRight size={10} />
-          </Link>
-        </div>
-      </div>
-
-      {/* Desktop: full-bleed asymmetric grid */}
+    <>
+      {/* Desktop grid */}
       <div
         className="hidden md:grid reveal"
-        style={{
-          gridTemplateColumns: "1.35fr 1fr",
-          gridTemplateRows: "1fr 1fr",
-          height: "88vh",
-        }}
+        style={{ gridTemplateColumns: cols, gridTemplateRows: "1fr 1fr", height: "88vh" }}
       >
         {p0 && (
           <Link
             to={`/projects/${p0.slug}`}
             className="relative overflow-hidden group"
-            style={{ gridRow: "1 / 3" }}
+            style={bigColSpan}
             onMouseEnter={() => setHovered(0)}
             onMouseLeave={() => setHovered(null)}
           >
@@ -175,13 +160,14 @@ function FeaturedProjects() {
               alt={p0.name}
               className={`w-full h-full object-cover transition-transform duration-[1200ms] ease-out ${hovered === 0 ? "scale-[1.04]" : "scale-100"}`}
             />
-            <Overlay p={p0} large />
+            <ProjectOverlay p={p0} large />
           </Link>
         )}
         {p1 && (
           <Link
             to={`/projects/${p1.slug}`}
             className="relative overflow-hidden group"
+            style={small1}
             onMouseEnter={() => setHovered(1)}
             onMouseLeave={() => setHovered(null)}
           >
@@ -190,13 +176,14 @@ function FeaturedProjects() {
               alt={p1.name}
               className={`w-full h-full object-cover transition-transform duration-[1200ms] ease-out ${hovered === 1 ? "scale-[1.04]" : "scale-100"}`}
             />
-            <Overlay p={p1} />
+            <ProjectOverlay p={p1} />
           </Link>
         )}
         {p2 && (
           <Link
             to={`/projects/${p2.slug}`}
             className="relative overflow-hidden group"
+            style={small2}
             onMouseEnter={() => setHovered(2)}
             onMouseLeave={() => setHovered(null)}
           >
@@ -205,12 +192,12 @@ function FeaturedProjects() {
               alt={p2.name}
               className={`w-full h-full object-cover transition-transform duration-[1200ms] ease-out ${hovered === 2 ? "scale-[1.04]" : "scale-100"}`}
             />
-            <Overlay p={p2} />
+            <ProjectOverlay p={p2} />
           </Link>
         )}
       </div>
 
-      {/* Mobile: stacked full-bleed */}
+      {/* Mobile: stacked */}
       <div className="md:hidden flex flex-col reveal">
         {display.map((p, i) => (
           <Link
@@ -219,15 +206,72 @@ function FeaturedProjects() {
             className="relative overflow-hidden group"
             style={{ aspectRatio: i === 0 ? "3/4" : "4/3" }}
           >
-            <img
-              src={getCoverImage(p)}
-              alt={p.name}
-              className="w-full h-full object-cover"
-            />
-            <Overlay p={p} large={i === 0} />
+            <img src={getCoverImage(p)} alt={p.name} className="w-full h-full object-cover" />
+            <ProjectOverlay p={p} large={i === 0} />
           </Link>
         ))}
       </div>
+    </>
+  );
+}
+
+const CATEGORIES = [
+  { key: "extreme",     label: "Extreme Environments",      configKey: "featuredExtremeIds"      as const },
+  { key: "hospitality", label: "Commercial & Hospitality",  configKey: "featuredHospitalityIds"  as const },
+  { key: "residential", label: "Residential",               configKey: "featuredResidentialIds"  as const },
+] as const;
+
+function FeaturedProjects() {
+  const { projects, siteConfig } = useData();
+
+  const sections = CATEGORIES.map(({ key, label, configKey }, sectionIdx) => {
+    const ids: string[] = siteConfig[configKey] ?? [];
+    const pinned = ids.map((id) => projects.find((p) => p.id === id)).filter((p): p is Project => Boolean(p));
+    // fallback: first 3 from this category
+    const fallback = projects.filter((p) => {
+      if (key === "extreme") return p.category === "Extreme Environments";
+      if (key === "hospitality") return p.category === "Commercial & Hospitality";
+      return p.category === "Residential";
+    }).slice(0, 3);
+    const display = pinned.length > 0 ? pinned : fallback;
+    return { key, label, display, flip: sectionIdx % 2 === 1 };
+  }).filter(({ display }) => display.length > 0);
+
+  if (sections.length === 0) return null;
+
+  return (
+    <section id="projects" style={{ paddingTop: "8rem", paddingBottom: "8rem" }}>
+      {sections.map(({ key, label, display, flip }, i) => (
+        <div key={key} style={{ marginBottom: i < sections.length - 1 ? "6rem" : 0 }}>
+          {/* Section header */}
+          <div className="max-w-screen-xl mx-auto site-px">
+            <div className="flex items-end justify-between mb-10 reveal">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-5 bg-[#C8963E]" style={{ height: "1.5px" }} />
+                  <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
+                    Selected Work
+                  </span>
+                </div>
+                <h2 className="font-['Libre_Bodoni'] italic text-[clamp(1.6rem,2.8vw,2.6rem)] font-normal text-[#F0EDE6]">
+                  {label}
+                </h2>
+              </div>
+              {i === 0 && (
+                <Link
+                  to="/projects"
+                  className="hidden sm:inline-flex items-center gap-1.5 font-['Inter'] font-[200] text-[9px] tracking-[0.25em] uppercase text-[#6a6460] hover:text-[#F0EDE6] transition-colors mb-1"
+                >
+                  All projects <ArrowUpRight size={10} />
+                </Link>
+              )}
+            </div>
+          </div>
+
+          {/* Full-bleed grid */}
+          <CategoryGrid display={display} flip={flip} />
+        </div>
+      ))}
     </section>
   );
 }

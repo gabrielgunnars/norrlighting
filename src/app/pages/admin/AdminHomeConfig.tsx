@@ -98,17 +98,23 @@ export function AdminHomeConfig() {
     if (file) handleVideoFile(file);
   };
 
-  // ── Featured projects ──────────────────────────────────────────────────
-  const featuredIds: string[] = Array.from(
-    { length: 3 },
-    (_, i) => siteConfig.featuredProjectIds[i] ?? ""
-  );
+  // ── Featured projects (per category) ──────────────────────────────────
+  const FEATURED_CATEGORIES = [
+    { label: "Extreme Environments",     idKey: "featuredExtremeIds"      as const, filter: "Extreme Environments" },
+    { label: "Commercial & Hospitality", idKey: "featuredHospitalityIds"  as const, filter: "Commercial & Hospitality" },
+    { label: "Residential",              idKey: "featuredResidentialIds"  as const, filter: "Residential" },
+  ] as const;
 
-  const setFeatured = async (slot: number, projectId: string) => {
-    const next = [...featuredIds];
+  const setFeaturedSlot = async (
+    idKey: "featuredExtremeIds" | "featuredHospitalityIds" | "featuredResidentialIds",
+    slot: number,
+    projectId: string
+  ) => {
+    const current: string[] = Array.from({ length: 3 }, (_, i) => (siteConfig[idKey] ?? [])[i] ?? "");
+    const next = [...current];
     next[slot] = projectId;
     await withSaving(async () => {
-      await updateSiteConfig({ featuredProjectIds: next.filter(Boolean) });
+      await updateSiteConfig({ [idKey]: next.filter(Boolean) });
     });
   };
 
@@ -237,51 +243,65 @@ export function AdminHomeConfig() {
         </div>
       </section>
 
-      {/* ── Featured Projects ── */}
-      <section style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <SectionDivider>Featured Projects</SectionDivider>
-        <p className="font-['Instrument_Sans'] text-xs font-light text-[#5a5a58]">
-          These 3 projects appear in the homepage grid. Select from your portfolio.
-        </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-          {[0, 1, 2].map((slot) => {
-            const selectedId = featuredIds[slot];
-            const selected = projects.find((p) => p.id === selectedId);
-            return (
-              <div
-                key={slot}
-                className="bg-[#0d0d0c] border border-[rgba(240,237,230,0.06)] p-4 sm:p-5 flex items-center gap-3 sm:gap-5"
-              >
-                <div className="w-16 h-16 shrink-0 bg-[#111110] overflow-hidden">
-                  {selected ? (
-                    <img src={getCoverImage(selected)} alt={selected.name} className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <span className="font-['Space_Mono'] text-[10px] text-[#2a2a28]">{slot + 1}</span>
-                    </div>
-                  )}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-['Inter'] font-[200] text-[9px] tracking-[0.25em] uppercase text-[#4a4a48] mb-2">
-                    Slot {slot + 1}
-                  </p>
-                  <select
-                    className="admin-input"
-                    value={selectedId}
-                    onChange={(e) => setFeatured(slot, e.target.value)}
-                    style={{ appearance: "none", cursor: "pointer" }}
+      {/* ── Featured Projects (per category) ── */}
+      {FEATURED_CATEGORIES.map((cat) => {
+        const ids: string[] = Array.from(
+          { length: 3 },
+          (_, i) => (siteConfig[cat.idKey] ?? [])[i] ?? ""
+        );
+        const categoryProjects = projects.filter((p) => p.category === cat.filter);
+        return (
+          <section key={cat.idKey} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <SectionDivider>Featured — {cat.label}</SectionDivider>
+            <p className="font-['Instrument_Sans'] text-xs font-light text-[#5a5a58]">
+              Up to 3 projects shown in the <span className="text-[#a09880]">{cat.label}</span> homepage section.
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+              {[0, 1, 2].map((slot) => {
+                const selectedId = ids[slot];
+                const selected = projects.find((p) => p.id === selectedId);
+                return (
+                  <div
+                    key={slot}
+                    className="bg-[#0d0d0c] border border-[rgba(240,237,230,0.06)] p-4 sm:p-5 flex items-center gap-3 sm:gap-5"
                   >
-                    <option value="">— None —</option>
-                    {projects.map((p) => (
-                      <option key={p.id} value={p.id}>{p.name}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
+                    <div className="w-16 h-16 shrink-0 bg-[#111110] overflow-hidden">
+                      {selected ? (
+                        <img src={getCoverImage(selected)} alt={selected.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <span className="font-['Space_Mono'] text-[10px] text-[#2a2a28]">{slot + 1}</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-['Inter'] font-[200] text-[9px] tracking-[0.25em] uppercase text-[#4a4a48] mb-2">
+                        Slot {slot + 1}
+                      </p>
+                      <select
+                        className="admin-input"
+                        value={selectedId}
+                        onChange={(e) => setFeaturedSlot(cat.idKey, slot, e.target.value)}
+                        style={{ appearance: "none", cursor: "pointer" }}
+                      >
+                        <option value="">— None —</option>
+                        {categoryProjects.length > 0
+                          ? categoryProjects.map((p) => (
+                              <option key={p.id} value={p.id}>{p.name}</option>
+                            ))
+                          : projects.map((p) => (
+                              <option key={p.id} value={p.id}>{p.name}</option>
+                            ))
+                        }
+                      </select>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        );
+      })}
 
       {/* ── Instagram Grid ── */}
       <section style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>

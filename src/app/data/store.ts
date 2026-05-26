@@ -30,6 +30,9 @@ export type SiteConfig = {
   heroImage: string | null;
   heroVideo: string | null;
   featuredProjectIds: string[];
+  featuredExtremeIds: string[];
+  featuredHospitalityIds: string[];
+  featuredResidentialIds: string[];
   instagramImages: string[];
 };
 
@@ -284,6 +287,9 @@ function dbToConfig(row: any): SiteConfig {
     heroImage: row.hero_image ?? null,
     heroVideo: row.hero_video ?? null,
     featuredProjectIds: row.featured_project_ids ?? [],
+    featuredExtremeIds: row.featured_extreme_ids ?? [],
+    featuredHospitalityIds: row.featured_hospitality_ids ?? [],
+    featuredResidentialIds: row.featured_residential_ids ?? [],
     instagramImages: row.instagram_images ?? [],
   };
 }
@@ -354,6 +360,9 @@ export function DataProvider({ children }: { children: ReactNode }) {
     heroImage: null,
     heroVideo: null,
     featuredProjectIds: [],
+    featuredExtremeIds: [],
+    featuredHospitalityIds: [],
+    featuredResidentialIds: [],
     instagramImages: [],
   });
   const [siteContent, setSiteContent] = useState<SiteContent>(DEFAULT_CONTENT);
@@ -543,6 +552,9 @@ export function DataProvider({ children }: { children: ReactNode }) {
       hero_image: next.heroImage,
       hero_video: next.heroVideo,
       featured_project_ids: next.featuredProjectIds,
+      featured_extreme_ids: next.featuredExtremeIds,
+      featured_hospitality_ids: next.featuredHospitalityIds,
+      featured_residential_ids: next.featuredResidentialIds,
       instagram_images: next.instagramImages,
     });
     if (error) throw error;
