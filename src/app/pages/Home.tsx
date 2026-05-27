@@ -377,7 +377,7 @@ function AwardsSection() {
                         {award.result || "Winner"}
                       </h3>
                       {award.subtext && (
-                        <p className="font-['Space_Mono'] text-[8px] tracking-[0.25em] uppercase text-[#4a4a48] mt-3 leading-relaxed">
+                        <p className="font-['Space_Mono'] text-[8px] tracking-[0.25em] uppercase text-[#9a9488] mt-3 leading-relaxed">
                           {award.subtext}
                         </p>
                       )}
