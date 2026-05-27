@@ -83,7 +83,7 @@ export const DEFAULT_CONTENT: SiteContent = {
     heroLine1: "We shape spaces",
     heroLine2: "through light.",
     heroSubtext:
-      "Architectural lighting design from Reykjavík, Iceland. Extreme environments, hospitality, and private residences.",
+      "A small practice shaping atmosphere through light. Iceland-based, working internationally on projects that demand precision and restraint.",
     services: [
       {
         title: "Extreme Environments",

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router";
 import defaultHero from "../../imports/ChatGPT_Image_May_9__2026__12_30_21_PM.png";
 import { useData, type Project } from "../data/store";
@@ -92,12 +92,6 @@ function Hero() {
           </div>
         </div>
 
-        <div className="mt-16 flex items-center gap-3 opacity-30">
-          <ChevronDown size={13} className="text-[#a09880] animate-bounce" />
-          <span className="font-['Instrument_Sans'] text-[8px] tracking-[0.4em] text-[#6a6460] uppercase">
-            Scroll
-          </span>
-        </div>
       </div>
     </section>
   );
@@ -336,9 +330,10 @@ function AwardsSection() {
           Recognition
         </p>
 
+        <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
         <div
           className="divide-x divide-[rgba(240,237,230,0.07)]"
-          style={{ display: "grid", gridTemplateColumns: `repeat(${awards.length}, 1fr)` }}
+          style={{ display: "grid", gridTemplateColumns: `repeat(${awards.length}, minmax(140px, 1fr))`, minWidth: "600px" }}
         >
           {awards.map((award, i) => (
             <div
@@ -366,6 +361,7 @@ function AwardsSection() {
               <div className="w-6 bg-[#C8963E] mt-5" style={{ height: "1.5px" }} />
             </div>
           ))}
+        </div>
         </div>
       </div>
     </section>
@@ -409,42 +405,129 @@ function InstagramGrid() {
   );
 }
 
+function StudioTeaser() {
+  return (
+    <section className="border-t border-[rgba(240,237,230,0.06)]">
+      <div className="max-w-[1600px] mx-auto site-px" style={{ paddingTop: "7rem", paddingBottom: "7rem" }}>
+        <div className="grid lg:grid-cols-12 gap-10 items-start reveal">
+          <div className="lg:col-span-1 flex items-center gap-3 pt-1">
+            <div className="w-5 bg-[#C8963E] shrink-0" style={{ height: "1.5px" }} />
+            <span className="font-['Instrument_Sans'] text-[11px] tracking-[0.25em] text-[#C8963E] uppercase whitespace-nowrap">
+              The Practice
+            </span>
+          </div>
+          <div className="lg:col-span-6 lg:col-start-2">
+            <p className="font-['Libre_Bodoni'] italic text-[clamp(1.3rem,2.2vw,2rem)] text-[#F0EDE6] font-normal leading-[1.5]">
+              "A deliberate small practice. We take on a limited number of commissions each year so that every project receives the full attention of the team that designed it."
+            </p>
+          </div>
+          <div className="lg:col-span-4 lg:col-start-9 flex flex-col gap-5">
+            <p className="font-['Instrument_Sans'] text-sm font-light text-[#a09880] leading-[1.9]">
+              Based in Reykjavík. Working internationally. Founded on the belief that the best lighting is the kind you feel without noticing.
+            </p>
+            <Link
+              to="/studio"
+              className="inline-flex items-center gap-2 font-['Instrument_Sans'] text-sm text-[#F0EDE6] group w-fit"
+            >
+              <span className="border-b border-[#C8963E]/50 pb-0.5 group-hover:border-[#C8963E] transition-colors duration-300">
+                About the studio
+              </span>
+              <ArrowUpRight size={13} className="text-[#C8963E]" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function CTA() {
   const { siteContent } = useData();
+  const formRef = useRef<HTMLFormElement>(null);
+  const [name, setName] = useState("");
+  const [projectType, setProjectType] = useState("");
+  const [message, setMessage] = useState("");
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() && !message.trim()) return;
+    const subject = `Project Inquiry${projectType ? ` — ${projectType}` : ""}`;
+    const body = `Name: ${name}\nProject type: ${projectType || "—"}\n\n${message}`;
+    window.location.href = `mailto:info@norrlighting.is?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setSent(true);
+    setTimeout(() => setSent(false), 3000);
+  };
+
   return (
     <section id="contact" className="border-t border-[rgba(240,237,230,0.06)]">
-      <div
-        className="max-w-[1600px] mx-auto site-px"
-        style={{ paddingTop: "10rem", paddingBottom: "10rem" }}
-      >
-        <div className="grid lg:grid-cols-12 items-end gap-10 reveal">
-          <div className="lg:col-span-8">
-            <h2 className="font-['Libre_Bodoni'] italic text-[clamp(2.5rem,6vw,6rem)] text-[#F0EDE6] font-normal leading-[0.93]">
+      <div className="max-w-[1600px] mx-auto site-px" style={{ paddingTop: "9rem", paddingBottom: "9rem" }}>
+        <div className="grid lg:grid-cols-12 gap-16 reveal">
+          {/* Heading */}
+          <div className="lg:col-span-5">
+            <h2 className="font-['Libre_Bodoni'] italic text-[clamp(2.5rem,5vw,5rem)] text-[#F0EDE6] font-normal leading-[0.95] mb-6">
               {siteContent.home.ctaLine1}
               <br />
-              <span
-                style={{
-                  background: "linear-gradient(135deg, #C8963E, #E8B96A)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
+              <span style={{ background: "linear-gradient(135deg,#C8963E,#E8B96A)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                 {siteContent.home.ctaLine2}
               </span>
             </h2>
-          </div>
-          <div className="lg:col-span-4">
-            <p className="font-['Instrument_Sans'] text-sm font-light text-[#6a6460] mb-8 leading-[1.9]">
+            <p className="font-['Instrument_Sans'] text-sm font-light text-[#6a6460] leading-[1.9] max-w-sm">
               {siteContent.home.ctaBody}
             </p>
-            <a
-              href="mailto:info@norrlighting.is"
-              className="inline-flex items-center gap-3 font-['Instrument_Sans'] text-sm bg-[#C8963E] text-[#0A0A09] px-7 py-4 hover:bg-[#F0EDE6] transition-colors duration-300"
-            >
-              Start a conversation <ArrowUpRight size={15} />
-            </a>
           </div>
+
+          {/* Form */}
+          <form ref={formRef} onSubmit={handleSubmit} className="lg:col-span-7 flex flex-col gap-4">
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block font-['Instrument_Sans'] text-[10px] tracking-[0.2em] uppercase text-[#5a5a58] mb-2">Name</label>
+                <input
+                  className="w-full bg-transparent border border-[rgba(240,237,230,0.1)] text-[#F0EDE6] font-['Instrument_Sans'] text-sm font-light px-4 py-3 outline-none focus:border-[#C8963E] transition-colors placeholder:text-[#3a3a38]"
+                  placeholder="Your name"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="block font-['Instrument_Sans'] text-[10px] tracking-[0.2em] uppercase text-[#5a5a58] mb-2">Project type</label>
+                <select
+                  className="w-full bg-[#0A0A09] border border-[rgba(240,237,230,0.1)] text-[#F0EDE6] font-['Instrument_Sans'] text-sm font-light px-4 py-3 outline-none focus:border-[#C8963E] transition-colors cursor-pointer"
+                  value={projectType}
+                  onChange={e => setProjectType(e.target.value)}
+                  style={{ appearance: "none" }}
+                >
+                  <option value="">Select…</option>
+                  <option value="Extreme Environments">Extreme Environments</option>
+                  <option value="Commercial & Hospitality">Commercial &amp; Hospitality</option>
+                  <option value="Residential">Residential</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label className="block font-['Instrument_Sans'] text-[10px] tracking-[0.2em] uppercase text-[#5a5a58] mb-2">Message</label>
+              <textarea
+                className="w-full bg-transparent border border-[rgba(240,237,230,0.1)] text-[#F0EDE6] font-['Instrument_Sans'] text-sm font-light px-4 py-3 outline-none focus:border-[#C8963E] transition-colors placeholder:text-[#3a3a38] resize-none"
+                rows={5}
+                placeholder="Tell us about your project…"
+                value={message}
+                onChange={e => setMessage(e.target.value)}
+              />
+            </div>
+            <div className="flex items-center gap-6">
+              <button
+                type="submit"
+                className="inline-flex items-center gap-3 font-['Instrument_Sans'] text-sm bg-[#C8963E] text-[#0A0A09] px-7 py-3.5 hover:bg-[#F0EDE6] transition-colors duration-300"
+              >
+                {sent ? "Opening email…" : "Send enquiry"}
+                <ArrowUpRight size={14} />
+              </button>
+              <span className="font-['Instrument_Sans'] text-xs text-[#3a3a38]">
+                or <a href="mailto:info@norrlighting.is" className="text-[#5a5a58] hover:text-[#a09880] transition-colors">info@norrlighting.is</a>
+              </span>
+            </div>
+          </form>
         </div>
       </div>
     </section>
@@ -458,8 +541,8 @@ export function Home() {
       <Hero />
       <AwardsSection />
       <FeaturedProjects />
+      <StudioTeaser />
       <Services />
-      <InstagramGrid />
       <CTA />
     </>
   );
