@@ -338,7 +338,7 @@ function AwardsSection() {
   return (
     <section className="border-t border-b border-[rgba(240,237,230,0.06)]">
       <div className="max-w-[1600px] mx-auto site-px" style={{ paddingTop: "3.5rem", paddingBottom: "3.5rem" }}>
-        <p className="font-['Space_Mono'] text-[8px] tracking-[0.35em] text-[#C8963E] uppercase mb-10">
+        <p className="font-['Space_Mono'] text-[10px] tracking-[0.3em] text-[#C8963E] uppercase mb-10">
           Recognition
         </p>
 
@@ -370,14 +370,14 @@ function AwardsSection() {
                     }}
                   >
                     <div>
-                      <p className="font-['Space_Mono'] text-[8px] tracking-[0.3em] uppercase text-[#4a4a48] mb-4 leading-relaxed">
+                      <p className="font-['Space_Mono'] text-[11px] tracking-[0.18em] uppercase text-[#5a5a58] mb-4 leading-relaxed">
                         {award.name}
                       </p>
-                      <h3 className="font-['Libre_Bodoni'] italic text-[clamp(1.4rem,2.2vw,2.2rem)] text-[#F0EDE6] font-normal leading-[1.05]">
+                      <h3 className="font-['Libre_Bodoni'] italic text-[clamp(1.6rem,2.4vw,2.6rem)] text-[#F0EDE6] font-normal leading-[1.05]">
                         {award.result || "Winner"}
                       </h3>
                       {award.subtext && (
-                        <p className="font-['Space_Mono'] text-[8px] tracking-[0.25em] uppercase text-[#9a9488] mt-3 leading-relaxed">
+                        <p className="font-['Space_Mono'] text-[11px] tracking-[0.15em] uppercase text-[#9a9488] mt-3 leading-relaxed">
                           {award.subtext}
                         </p>
                       )}
