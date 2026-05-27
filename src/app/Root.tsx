@@ -5,7 +5,6 @@ import { useData } from "./data/store";
 
 const navLinks = [
   { label: "Projects", to: "/projects" },
-  { label: "Showcase", to: "/showcase" },
   { label: "Team", to: "/team" },
   { label: "Studio", to: "/studio" },
 ];
