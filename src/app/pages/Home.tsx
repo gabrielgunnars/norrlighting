@@ -30,7 +30,7 @@ function Hero() {
   const heroVideo = siteConfig.heroVideo ?? null;
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
+    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
       <div className="absolute inset-0">
         {heroVideo ? (
           <video
@@ -53,10 +53,10 @@ function Hero() {
       </div>
 
       <div
-        style={{ paddingBottom: "10rem" }}
+        style={{ paddingTop: "8rem" }}
         className={`relative z-10 max-w-[1600px] mx-auto site-px w-full transition-all duration-[1200ms] ease-out delay-300 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
       >
-        <div className="grid lg:grid-cols-12 gap-8 items-end">
+        <div className="grid lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8">
             <h1
               className="font-['Libre_Bodoni'] italic text-[clamp(3rem,8.5vw,7.5rem)] leading-[0.93] font-normal text-white"
@@ -76,7 +76,7 @@ function Hero() {
               </span>
             </h1>
           </div>
-          <div className="lg:col-span-4 lg:pb-2 space-y-6">
+          <div className="lg:col-span-4 space-y-6">
             <p className="font-['Instrument_Sans'] text-sm font-light leading-[1.9] text-[#a09880] max-w-xs">
               {c.heroSubtext}
             </p>
@@ -91,7 +91,6 @@ function Hero() {
             </a>
           </div>
         </div>
-
       </div>
     </section>
   );
