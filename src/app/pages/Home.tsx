@@ -329,70 +329,42 @@ function AwardsSection() {
   const { awards } = useData();
   if (awards.length === 0) return null;
 
-  // Split into rows of max 4
-  const rows: typeof awards[] = [];
-  for (let i = 0; i < awards.length; i += 4) {
-    rows.push(awards.slice(i, i + 4));
-  }
-
   return (
     <section className="border-t border-b border-[rgba(240,237,230,0.06)]">
       <div className="max-w-[1600px] mx-auto site-px" style={{ paddingTop: "3.5rem", paddingBottom: "3.5rem" }}>
-        <p className="font-['Space_Mono'] text-[10px] tracking-[0.3em] text-[#C8963E] uppercase mb-10">
+        <p className="font-['Instrument_Sans'] text-[11px] tracking-[0.25em] text-[#C8963E] uppercase mb-10">
           Recognition
         </p>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-          {rows.map((row, rowIdx) => {
-            const isLast = rowIdx === rows.length - 1;
-            const centered = isLast && row.length < 4;
-            return (
-              <div
-                key={rowIdx}
-                className={`flex ${centered ? "justify-center" : ""}`}
-                style={{
-                  borderTop: rowIdx > 0 ? "1px solid rgba(240,237,230,0.06)" : "none",
-                  paddingTop: rowIdx > 0 ? "2.5rem" : 0,
-                  marginTop: rowIdx > 0 ? "2.5rem" : 0,
-                }}
-              >
-                {row.map((award, i) => (
-                  <div
-                    key={award.id}
-                    className="reveal flex flex-col justify-between"
-                    style={{
-                      flex: centered ? "0 0 25%" : "1",
-                      maxWidth: "25%",
-                      paddingLeft: i === 0 ? 0 : "2rem",
-                      paddingRight: i === row.length - 1 ? 0 : "2rem",
-                      borderLeft: i === 0 ? "none" : "1px solid rgba(240,237,230,0.07)",
-                      transitionDelay: `${(rowIdx * 4 + i) * 60}ms`,
-                    }}
-                  >
-                    <div>
-                      <p className="font-['Space_Mono'] text-[11px] tracking-[0.18em] uppercase text-[#5a5a58] mb-4 leading-relaxed">
-                        {award.name}
-                      </p>
-                      <h3 className="font-['Libre_Bodoni'] italic text-[clamp(1.6rem,2.4vw,2.6rem)] text-[#F0EDE6] font-normal leading-[1.05]">
-                        {award.result || "Winner"}
-                      </h3>
-                      {award.subtext && (
-                        <p className="font-['Space_Mono'] text-[11px] tracking-[0.15em] uppercase text-[#9a9488] mt-3 leading-relaxed">
-                          {award.subtext}
-                        </p>
-                      )}
-                    </div>
-                    <div className="w-6 bg-[#C8963E] mt-6" style={{ height: "1.5px" }} />
-                  </div>
-                ))}
+        <div className="flex">
+          {awards.map((award, i) => (
+            <div
+              key={award.id}
+              className="reveal flex flex-col justify-between flex-1"
+              style={{
+                paddingLeft: i === 0 ? 0 : "2rem",
+                paddingRight: i === awards.length - 1 ? 0 : "2rem",
+                borderLeft: i === 0 ? "none" : "1px solid rgba(240,237,230,0.07)",
+                transitionDelay: `${i * 60}ms`,
+              }}
+            >
+              <div>
+                <p className="font-['Instrument_Sans'] text-xs font-light tracking-[0.15em] uppercase text-[#5a5a58] mb-4">
+                  {award.name}
+                </p>
+                <h3 className="font-['Libre_Bodoni'] italic text-[clamp(1.4rem,2vw,2.2rem)] text-[#F0EDE6] font-normal leading-tight">
+                  {award.result || "Winner"}
+                </h3>
+                {award.subtext && (
+                  <p className="font-['Instrument_Sans'] text-xs font-light tracking-[0.12em] uppercase text-[#9a9488] mt-2">
+                    {award.subtext}
+                  </p>
+                )}
               </div>
-            );
-          })}
+              <div className="w-6 bg-[#C8963E] mt-5" style={{ height: "1.5px" }} />
+            </div>
+          ))}
         </div>
-
-        <p className="font-['Instrument_Sans'] text-sm font-light text-[#4a4a48] mt-10 text-center leading-relaxed">
-          Internationally recognized for atmospheric lighting in Icelandic nature and architectural environments.
-        </p>
       </div>
     </section>
   );
@@ -483,7 +455,6 @@ export function Home() {
     <>
       <Hero />
       <AwardsSection />
-      <FeaturedProjects />
       <Services />
       <InstagramGrid />
       <CTA />
