@@ -188,26 +188,41 @@ export function Studio() {
             </span>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-[rgba(240,237,230,0.06)]">
+          <div className="divide-y divide-[rgba(240,237,230,0.06)]">
             {c.awards.map((a, i) => (
               <div
                 key={i}
-                className="reveal bg-[#0A0A09] p-8 flex flex-col justify-between"
-                style={{ minHeight: "180px" }}
+                className="reveal flex items-center gap-6 py-5"
               >
-                <div>
-                  <p className="font-['Space_Mono'] text-[8px] tracking-[0.3em] uppercase text-[#C8963E] mb-3">
-                    {a.result} · {a.year}
-                  </p>
-                  <h3 className="font-['Libre_Bodoni'] italic text-lg text-[#F0EDE6] font-normal leading-tight">
+                {/* Year */}
+                <span className="font-['Space_Mono'] text-[10px] text-[#3a3a38] w-8 shrink-0">
+                  {a.year}
+                </span>
+
+                {/* Name + sub */}
+                <div className="flex-1 min-w-0">
+                  <p className="font-['Instrument_Sans'] text-[15px] font-light text-[#F0EDE6] leading-snug">
                     {a.name}
-                  </h3>
+                  </p>
                   {a.sub && (
-                    <p className="font-['Instrument_Sans'] text-xs font-light text-[#4a4a48] mt-1">
+                    <p className="font-['Space_Mono'] text-[9px] tracking-[0.2em] uppercase text-[#4a4a48] mt-1">
                       {a.sub}
                     </p>
                   )}
                 </div>
+
+                {/* Result badge */}
+                <span
+                  className={`font-['Space_Mono'] text-[9px] tracking-[0.25em] uppercase shrink-0 px-3 py-1.5 border ${
+                    a.result === "Winner"
+                      ? "text-[#C8963E] border-[#C8963E]/30 bg-[rgba(200,150,62,0.06)]"
+                      : a.result === "Finalist"
+                      ? "text-[#a09880] border-[rgba(240,237,230,0.12)] bg-[rgba(240,237,230,0.03)]"
+                      : "text-[#6a6460] border-[rgba(240,237,230,0.08)] bg-transparent"
+                  }`}
+                >
+                  {a.result}
+                </span>
               </div>
             ))}
           </div>
