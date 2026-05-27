@@ -85,7 +85,7 @@ export function Projects() {
     <>
       {/* Header */}
       <div
-        className="max-w-screen-xl mx-auto site-px"
+        className="max-w-[1600px] mx-auto site-px"
         style={{ paddingTop: "9rem", paddingBottom: "2.5rem" }}
       >
         <div className="flex items-center gap-3">
@@ -168,7 +168,7 @@ export function Projects() {
         className="group block border-t border-b border-[rgba(240,237,230,0.07)] bg-[#0A0A09] hover:bg-[#0d0d0c] transition-colors duration-500"
         style={{ paddingTop: "5rem", paddingBottom: "5rem", paddingLeft: "clamp(2rem,6vw,6rem)", paddingRight: "clamp(2rem,6vw,6rem)" }}
       >
-        <div className="max-w-screen-xl mx-auto flex items-end justify-between gap-8">
+        <div className="max-w-[1600px] mx-auto flex items-end justify-between gap-8">
           <div>
             <p className="font-['Space_Mono'] text-[8px] tracking-[0.4em] uppercase text-[#C8963E] mb-4">
               Cinematic Experience

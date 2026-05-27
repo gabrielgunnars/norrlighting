@@ -60,7 +60,7 @@ export function Studio() {
         className="relative border-b border-[rgba(240,237,230,0.06)] overflow-hidden"
         style={{ paddingTop: "12rem", paddingBottom: "7rem" }}
       >
-        <div className="relative z-10 max-w-screen-xl mx-auto site-px">
+        <div className="relative z-10 max-w-[1600px] mx-auto site-px">
           <div className="flex items-center gap-3 mb-8 reveal">
             <div className="w-6 bg-[#C8963E]" style={{ height: "1.5px" }} />
             <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
@@ -85,7 +85,7 @@ export function Studio() {
       {/* About Us */}
       <section id="about" className="border-b border-[rgba(240,237,230,0.06)]">
         <div
-          className="max-w-screen-xl mx-auto site-px"
+          className="max-w-[1600px] mx-auto site-px"
           style={{ paddingTop: "8rem", paddingBottom: "8rem" }}
         >
           <div className="grid lg:grid-cols-12 gap-16 lg:gap-24">
@@ -118,7 +118,7 @@ export function Studio() {
       {/* From concept to atmosphere */}
       <section id="process" className="border-b border-[rgba(240,237,230,0.06)] bg-[#0d0d0c]">
         <div
-          className="max-w-screen-xl mx-auto site-px"
+          className="max-w-[1600px] mx-auto site-px"
           style={{ paddingTop: "8rem", paddingBottom: "8rem" }}
         >
           <div className="grid lg:grid-cols-12 gap-16 lg:gap-24">
@@ -153,7 +153,7 @@ export function Studio() {
       {/* Disciplines / Where we work */}
       <section id="disciplines" className="border-b border-[rgba(240,237,230,0.06)]">
         <div
-          className="max-w-screen-xl mx-auto site-px"
+          className="max-w-[1600px] mx-auto site-px"
           style={{ paddingTop: "8rem", paddingBottom: "8rem" }}
         >
           <div className="grid lg:grid-cols-12 gap-16 lg:gap-24">
@@ -178,7 +178,7 @@ export function Studio() {
       {/* Awards */}
       <section id="awards" className="border-b border-[rgba(240,237,230,0.06)] bg-[#0d0d0c]">
         <div
-          className="max-w-screen-xl mx-auto site-px"
+          className="max-w-[1600px] mx-auto site-px"
           style={{ paddingTop: "8rem", paddingBottom: "8rem" }}
         >
           <div className="flex items-center gap-3 mb-14 reveal">
@@ -232,7 +232,7 @@ export function Studio() {
       {/* CTA */}
       <section>
         <div
-          className="max-w-screen-xl mx-auto site-px"
+          className="max-w-[1600px] mx-auto site-px"
           style={{ paddingTop: "8rem", paddingBottom: "8rem" }}
         >
           <div className="grid lg:grid-cols-12 items-end gap-10 reveal">

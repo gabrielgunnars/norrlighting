@@ -172,6 +172,13 @@ body {
   }
 }
 
+@media (min-width: 1440px) {
+  .site-px {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+}
+
 /* Admin panel styles */
 .admin-sidebar {
   background: #0d0d0c;

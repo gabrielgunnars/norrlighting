@@ -54,7 +54,7 @@ function Hero() {
 
       <div
         style={{ paddingBottom: "10rem" }}
-        className={`relative z-10 max-w-screen-xl mx-auto site-px w-full transition-all duration-[1200ms] ease-out delay-300 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+        className={`relative z-10 max-w-[1600px] mx-auto site-px w-full transition-all duration-[1200ms] ease-out delay-300 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
       >
         <div className="grid lg:grid-cols-12 gap-8 items-end">
           <div className="lg:col-span-8">
@@ -244,7 +244,7 @@ function FeaturedProjects() {
       {sections.map(({ key, label, display, flip }, i) => (
         <div key={key} style={{ marginBottom: i < sections.length - 1 ? "6rem" : 0 }}>
           {/* Section header */}
-          <div className="max-w-screen-xl mx-auto site-px">
+          <div className="max-w-[1600px] mx-auto site-px">
             <div className="flex items-end justify-between mb-10 reveal">
               <div>
                 <div className="flex items-center gap-3 mb-3">
@@ -283,7 +283,7 @@ function Services() {
   return (
     <section className="border-t border-[rgba(240,237,230,0.06)]">
       <div
-        className="max-w-screen-xl mx-auto site-px"
+        className="max-w-[1600px] mx-auto site-px"
         style={{ paddingTop: "10rem", paddingBottom: "10rem" }}
       >
         <div className="grid lg:grid-cols-12 gap-16 lg:gap-24">
@@ -337,7 +337,7 @@ function AwardsSection() {
 
   return (
     <section className="border-t border-b border-[rgba(240,237,230,0.06)]">
-      <div className="max-w-screen-xl mx-auto site-px" style={{ paddingTop: "3.5rem", paddingBottom: "3.5rem" }}>
+      <div className="max-w-[1600px] mx-auto site-px" style={{ paddingTop: "3.5rem", paddingBottom: "3.5rem" }}>
         <p className="font-['Space_Mono'] text-[8px] tracking-[0.35em] text-[#C8963E] uppercase mb-10">
           Recognition
         </p>
@@ -406,7 +406,7 @@ function InstagramGrid() {
   return (
     <section className="border-t border-[rgba(240,237,230,0.06)]">
       <div
-        className="max-w-screen-xl mx-auto site-px"
+        className="max-w-[1600px] mx-auto site-px"
         style={{ paddingTop: "6rem", paddingBottom: "6rem" }}
       >
         <div className="flex items-center gap-3 mb-10 reveal">
@@ -440,7 +440,7 @@ function CTA() {
   return (
     <section id="contact" className="border-t border-[rgba(240,237,230,0.06)]">
       <div
-        className="max-w-screen-xl mx-auto site-px"
+        className="max-w-[1600px] mx-auto site-px"
         style={{ paddingTop: "10rem", paddingBottom: "10rem" }}
       >
         <div className="grid lg:grid-cols-12 items-end gap-10 reveal">

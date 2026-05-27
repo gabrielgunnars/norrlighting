@@ -131,7 +131,7 @@ function HeroSlideshow({ project }: { project: Project }) {
       </div>
 
       {/* Back link — top */}
-      <div className="absolute top-36 left-0 right-0 z-20 max-w-screen-xl mx-auto site-px">
+      <div className="absolute top-36 left-0 right-0 z-20 max-w-[1600px] mx-auto site-px">
         <Link
           to="/projects"
           className="inline-flex items-center gap-2 font-['Instrument_Sans'] text-xs font-light text-[#8a8478] hover:text-[#F0EDE6] transition-colors group"
@@ -143,7 +143,7 @@ function HeroSlideshow({ project }: { project: Project }) {
 
       {/* Bottom-left: title block */}
       <div
-        className="absolute bottom-0 left-0 right-0 z-10 max-w-screen-xl mx-auto site-px w-full"
+        className="absolute bottom-0 left-0 right-0 z-10 max-w-[1600px] mx-auto site-px w-full"
         style={{ paddingBottom: "5rem" }}
       >
         <div className="flex items-end justify-between gap-8">
@@ -221,7 +221,7 @@ function GallerySection({
 
   return (
     <section style={{ paddingBottom: "8rem" }}>
-      <div className="max-w-screen-xl mx-auto site-px mb-10 reveal">
+      <div className="max-w-[1600px] mx-auto site-px mb-10 reveal">
         <div className="flex items-center gap-3">
           <div className="w-5 bg-[#C8963E]" style={{ height: "1.5px" }} />
           <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
@@ -233,7 +233,7 @@ function GallerySection({
         </div>
       </div>
 
-      <div className="max-w-screen-xl mx-auto site-px">
+      <div className="max-w-[1600px] mx-auto site-px">
         {/* Single image */}
         {images.length === 1 && (
           <div
@@ -358,7 +358,7 @@ export function ProjectDetail() {
 
       {/* Brief — editorial split layout */}
       <section
-        className="max-w-screen-xl mx-auto site-px"
+        className="max-w-[1600px] mx-auto site-px"
         style={{ paddingTop: "8rem", paddingBottom: "8rem" }}
       >
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
@@ -410,7 +410,7 @@ export function ProjectDetail() {
       {/* Editorial prev / next navigation */}
       <section className="border-t border-[rgba(240,237,230,0.06)]">
         <div
-          className="max-w-screen-xl mx-auto site-px"
+          className="max-w-[1600px] mx-auto site-px"
           style={{ paddingTop: "6rem", paddingBottom: "6rem" }}
         >
           <div className="grid grid-cols-2 gap-8">

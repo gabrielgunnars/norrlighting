@@ -103,7 +103,7 @@ export function Team() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A09]/70 to-[#0A0A09]" />
         </div>
 
-        <div className="relative z-10 max-w-screen-xl mx-auto site-px">
+        <div className="relative z-10 max-w-[1600px] mx-auto site-px">
           <div className="flex items-center gap-3 mb-8 reveal">
             <div className="w-6 bg-[#C8963E]" style={{ height: "1.5px" }} />
             <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
@@ -121,7 +121,7 @@ export function Team() {
       </section>
 
       {/* Team grid */}
-      <section className="max-w-screen-xl mx-auto site-px" style={{ paddingTop: '8rem', paddingBottom: '8rem' }}>
+      <section className="max-w-[1600px] mx-auto site-px" style={{ paddingTop: '8rem', paddingBottom: '8rem' }}>
         <div className="grid md:grid-cols-2 lg:grid-cols-3" style={{ gap: '5rem 3.5rem' }}>
           {team.slice(0, 3).map((member, i) => (
             <MemberCard key={member.id} member={member} index={i} />
@@ -138,7 +138,7 @@ export function Team() {
 
       {/* Values */}
       <section className="border-t border-[rgba(240,237,230,0.06)] bg-[#0d0d0c]">
-        <div className="max-w-screen-xl mx-auto site-px" style={{ paddingTop: '8rem', paddingBottom: '8rem' }}>
+        <div className="max-w-[1600px] mx-auto site-px" style={{ paddingTop: '8rem', paddingBottom: '8rem' }}>
           <div className="grid lg:grid-cols-12 gap-16 lg:gap-24">
             <div className="lg:col-span-4 reveal-left">
               <div className="flex items-center gap-3 mb-6">
@@ -178,7 +178,7 @@ export function Team() {
 
       {/* CTA */}
       <section className="border-t border-[rgba(240,237,230,0.06)]">
-        <div className="max-w-screen-xl mx-auto site-px" style={{ paddingTop: '8rem', paddingBottom: '8rem' }}>
+        <div className="max-w-[1600px] mx-auto site-px" style={{ paddingTop: '8rem', paddingBottom: '8rem' }}>
           <div className="grid lg:grid-cols-12 items-end gap-12 reveal">
             <div className="lg:col-span-7">
               <h2 className="font-['Libre_Bodoni'] italic text-[clamp(2.5rem,6vw,5.5rem)] text-[#F0EDE6] font-normal leading-[0.93]">
