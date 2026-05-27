@@ -409,19 +409,18 @@ function StudioTeaser() {
   return (
     <section className="border-t border-[rgba(240,237,230,0.06)]">
       <div className="max-w-[1600px] mx-auto site-px" style={{ paddingTop: "7rem", paddingBottom: "7rem" }}>
-        <div className="grid lg:grid-cols-12 gap-10 items-start reveal">
-          <div className="lg:col-span-1 flex items-center gap-3 pt-1">
-            <div className="w-5 bg-[#C8963E] shrink-0" style={{ height: "1.5px" }} />
-            <span className="font-['Instrument_Sans'] text-[11px] tracking-[0.25em] text-[#C8963E] uppercase whitespace-nowrap">
-              The Practice
-            </span>
-          </div>
-          <div className="lg:col-span-6 lg:col-start-2">
-            <p className="font-['Libre_Bodoni'] italic text-[clamp(1.3rem,2.2vw,2rem)] text-[#F0EDE6] font-normal leading-[1.5]">
-              "A deliberate small practice. We take on a limited number of commissions each year so that every project receives the full attention of the team that designed it."
-            </p>
-          </div>
-          <div className="lg:col-span-4 lg:col-start-9 flex flex-col gap-5">
+        <div className="flex items-center gap-3 mb-10 reveal">
+          <div className="w-5 bg-[#C8963E] shrink-0" style={{ height: "1.5px" }} />
+          <span className="font-['Instrument_Sans'] text-[11px] tracking-[0.25em] text-[#C8963E] uppercase">
+            The Practice
+          </span>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start reveal">
+          <p className="font-['Libre_Bodoni'] italic text-[clamp(1.3rem,2vw,1.9rem)] text-[#F0EDE6] font-normal leading-[1.6]">
+            "A deliberate small practice. We take on a limited number of commissions each year so that every project receives the full attention of the team that designed it."
+          </p>
+          <div className="flex flex-col gap-5 lg:pt-2">
             <p className="font-['Instrument_Sans'] text-sm font-light text-[#a09880] leading-[1.9]">
               Based in Reykjavík. Working internationally. Founded on the belief that the best lighting is the kind you feel without noticing.
             </p>
@@ -465,7 +464,7 @@ function CTA() {
         <div className="grid lg:grid-cols-12 gap-16 reveal">
           {/* Heading */}
           <div className="lg:col-span-5">
-            <h2 className="font-['Libre_Bodoni'] italic text-[clamp(2.5rem,5vw,5rem)] text-[#F0EDE6] font-normal leading-[0.95] mb-6">
+            <h2 className="font-['Libre_Bodoni'] italic text-[clamp(2rem,3.5vw,3.8rem)] text-[#F0EDE6] font-normal leading-[1.05] mb-6">
               {siteContent.home.ctaLine1}
               <br />
               <span style={{ background: "linear-gradient(135deg,#C8963E,#E8B96A)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
