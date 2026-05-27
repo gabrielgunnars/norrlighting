@@ -149,12 +149,12 @@ export const DEFAULT_CONTENT: SiteContent = {
     awards: [
       { name: "DARC AWARDS", sub: "Architectural", year: "2016", result: "Winner" },
       { name: "DARC AWARDS", sub: "Architectural", year: "2018", result: "Winner" },
-      { name: "LIGHTING DESIGN AWARDS", sub: "", year: "2019", result: "Shortlisted" },
+      { name: "LIGHTING DESIGN AWARDS", sub: "", year: "2019", result: "Winner" },
       {
         name: "NORDISK LYSPRIS",
         sub: "Nordic Light Prize",
         year: "2020",
-        result: "Finalist",
+        result: "Winner",
       },
       {
         name: "LIT LIGHTING DESIGN AWARDS",

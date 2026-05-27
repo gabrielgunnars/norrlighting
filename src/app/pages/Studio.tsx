@@ -203,7 +203,7 @@ export function Studio() {
                 }}
               >
                 <div>
-                  <p className="font-['Instrument_Sans'] text-xs font-light tracking-[0.15em] uppercase text-[#5a5a58] mb-4">
+                  <p className="font-['Instrument_Sans'] text-xs font-light tracking-[0.15em] uppercase text-[#5a5a58] mb-4 truncate">
                     {a.name}
                   </p>
                   <h3 className="font-['Libre_Bodoni'] italic text-[clamp(1.2rem,1.8vw,2rem)] text-[#F0EDE6] font-normal leading-tight">

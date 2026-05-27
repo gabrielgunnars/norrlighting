@@ -351,7 +351,7 @@ function AwardsSection() {
               }}
             >
               <div>
-                <p className="font-['Instrument_Sans'] text-xs font-light tracking-[0.15em] uppercase text-[#5a5a58] mb-4">
+                <p className="font-['Instrument_Sans'] text-xs font-light tracking-[0.15em] uppercase text-[#5a5a58] mb-4 truncate">
                   {award.name}
                 </p>
                 <h3 className="font-['Libre_Bodoni'] italic text-[clamp(1.4rem,2vw,2.2rem)] text-[#F0EDE6] font-normal leading-tight">
