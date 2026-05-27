@@ -188,41 +188,34 @@ export function Studio() {
             </span>
           </div>
 
-          <div className="divide-y divide-[rgba(240,237,230,0.06)]">
+          <div
+            className="reveal divide-x divide-[rgba(240,237,230,0.07)]"
+            style={{ display: "grid", gridTemplateColumns: `repeat(${c.awards.length}, 1fr)` }}
+          >
             {c.awards.map((a, i) => (
               <div
                 key={i}
-                className="reveal flex items-center gap-6 py-5"
+                className="flex flex-col justify-between"
+                style={{
+                  paddingLeft: i === 0 ? 0 : "2rem",
+                  paddingRight: i === c.awards.length - 1 ? 0 : "2rem",
+                  transitionDelay: `${i * 60}ms`,
+                }}
               >
-                {/* Year */}
-                <span className="font-['Instrument_Sans'] text-[10px] text-[#3a3a38] w-8 shrink-0">
-                  {a.year}
-                </span>
-
-                {/* Name + sub */}
-                <div className="flex-1 min-w-0">
-                  <p className="font-['Instrument_Sans'] text-[15px] font-light text-[#F0EDE6] leading-snug">
+                <div>
+                  <p className="font-['Instrument_Sans'] text-xs font-light tracking-[0.15em] uppercase text-[#5a5a58] mb-4">
                     {a.name}
                   </p>
-                  {a.sub && (
-                    <p className="font-['Instrument_Sans'] text-[9px] tracking-[0.2em] uppercase text-[#4a4a48] mt-1">
-                      {a.sub}
+                  <h3 className="font-['Libre_Bodoni'] italic text-[clamp(1.2rem,1.8vw,2rem)] text-[#F0EDE6] font-normal leading-tight">
+                    {a.result}
+                  </h3>
+                  {(a.sub || a.year) && (
+                    <p className="font-['Instrument_Sans'] text-xs font-light tracking-[0.12em] uppercase text-[#9a9488] mt-2">
+                      {[a.sub, a.year].filter(Boolean).join(" · ")}
                     </p>
                   )}
                 </div>
-
-                {/* Result badge */}
-                <span
-                  className={`font-['Instrument_Sans'] text-[9px] tracking-[0.25em] uppercase shrink-0 px-3 py-1.5 border ${
-                    a.result === "Winner"
-                      ? "text-[#C8963E] border-[#C8963E]/30 bg-[rgba(200,150,62,0.06)]"
-                      : a.result === "Finalist"
-                      ? "text-[#a09880] border-[rgba(240,237,230,0.12)] bg-[rgba(240,237,230,0.03)]"
-                      : "text-[#6a6460] border-[rgba(240,237,230,0.08)] bg-transparent"
-                  }`}
-                >
-                  {a.result}
-                </span>
+                <div className="w-6 bg-[#C8963E] mt-5" style={{ height: "1.5px" }} />
               </div>
             ))}
           </div>

@@ -336,15 +336,17 @@ function AwardsSection() {
           Recognition
         </p>
 
-        <div className="flex">
+        <div
+          className="divide-x divide-[rgba(240,237,230,0.07)]"
+          style={{ display: "grid", gridTemplateColumns: `repeat(${awards.length}, 1fr)` }}
+        >
           {awards.map((award, i) => (
             <div
               key={award.id}
-              className="reveal flex flex-col justify-between flex-1"
+              className="reveal flex flex-col justify-between"
               style={{
                 paddingLeft: i === 0 ? 0 : "2rem",
                 paddingRight: i === awards.length - 1 ? 0 : "2rem",
-                borderLeft: i === 0 ? "none" : "1px solid rgba(240,237,230,0.07)",
                 transitionDelay: `${i * 60}ms`,
               }}
             >
