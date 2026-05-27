@@ -34,7 +34,7 @@ function ProjectCard({
               : "clamp(1.4rem, 3vw, 2.5rem)",
         }}
       >
-        <p className="font-['Space_Mono'] text-[8px] tracking-[0.35em] uppercase text-[#C8963E] mb-3">
+        <p className="font-['Instrument_Sans'] text-[8px] tracking-[0.35em] uppercase text-[#C8963E] mb-3">
           {project.category}
         </p>
         <h2
@@ -90,7 +90,7 @@ export function Projects() {
       >
         <div className="flex items-center gap-3">
           <div className="w-6 bg-[#C8963E]" style={{ height: "1.5px" }} />
-          <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
+          <span className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
             Selected Work
           </span>
         </div>

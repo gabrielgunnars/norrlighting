@@ -81,7 +81,7 @@ export function AdminAwards() {
     <div style={{ maxWidth: "52rem", display: "flex", flexDirection: "column", gap: "2.5rem" }}>
       <div className="flex items-start justify-between">
         <div>
-          <p className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-3">
+          <p className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-3">
             Homepage
           </p>
           <h1 className="font-['Libre_Bodoni'] italic text-3xl text-[#F0EDE6] font-normal">

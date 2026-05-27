@@ -88,7 +88,7 @@ function Lightbox({
         ))}
       </div>
 
-      <div className="absolute bottom-6 right-6 font-['Space_Mono'] text-[8px] tracking-widest text-[#4a4a48]">
+      <div className="absolute bottom-6 right-6 font-['Instrument_Sans'] text-[8px] tracking-widest text-[#4a4a48]">
         {idx + 1} / {images.length}
       </div>
     </div>
@@ -150,7 +150,7 @@ function HeroSlideshow({ project }: { project: Project }) {
           <div>
             <div className="flex items-center gap-3 mb-5">
               <div className="w-5 bg-[#C8963E]" style={{ height: "1.5px" }} />
-              <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
+              <span className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
                 {project.category}
               </span>
             </div>
@@ -168,7 +168,7 @@ function HeroSlideshow({ project }: { project: Project }) {
               {project.location}
             </p>
             {images.length > 1 && (
-              <p className="font-['Space_Mono'] text-[8px] tracking-widest text-[#3a3a38]">
+              <p className="font-['Instrument_Sans'] text-[8px] tracking-widest text-[#3a3a38]">
                 {String(idx + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
               </p>
             )}
@@ -224,10 +224,10 @@ function GallerySection({
       <div className="max-w-[1600px] mx-auto site-px mb-10 reveal">
         <div className="flex items-center gap-3">
           <div className="w-5 bg-[#C8963E]" style={{ height: "1.5px" }} />
-          <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
+          <span className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
             Gallery
           </span>
-          <span className="font-['Space_Mono'] text-[9px] tracking-[0.2em] text-[#3a3a38] ml-1">
+          <span className="font-['Instrument_Sans'] text-[9px] tracking-[0.2em] text-[#3a3a38] ml-1">
             {images.length} image{images.length !== 1 ? "s" : ""}
           </span>
         </div>

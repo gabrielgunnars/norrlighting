@@ -165,7 +165,7 @@ export function Showcase() {
           transition: "opacity 0.9s ease",
         }}
       >
-        <span className="font-['Space_Mono'] text-[7px] tracking-[0.45em] uppercase text-[#4a4a48]">
+        <span className="font-['Instrument_Sans'] text-[7px] tracking-[0.45em] uppercase text-[#4a4a48]">
           Scroll
         </span>
         <div
@@ -285,7 +285,7 @@ export function Showcase() {
               style={{ zIndex: 5 }}
             >
               <span
-                className="font-['Space_Mono'] text-[#C8963E]"
+                className="font-['Instrument_Sans'] text-[#C8963E]"
                 style={{ fontSize: "clamp(5rem, 12vw, 12rem)" }}
               >
                 {num}

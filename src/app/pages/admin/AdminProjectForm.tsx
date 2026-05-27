@@ -186,7 +186,7 @@ export function AdminProjectForm() {
           <ArrowLeft size={12} className="group-hover:-translate-x-0.5 transition-transform" />
           Back to projects
         </Link>
-        <p className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-2">
+        <p className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-2">
           {isEdit ? "Edit Project" : "New Project"}
         </p>
         <h1 className="font-['Libre_Bodoni'] italic text-3xl text-[#F0EDE6] font-normal">
@@ -219,7 +219,7 @@ export function AdminProjectForm() {
         <div>
           <FieldLabel>URL Slug *</FieldLabel>
           <div className="flex items-center border border-[rgba(240,237,230,0.1)] bg-[#1a1a18] focus-within:border-[#C8963E] transition-colors">
-            <span className="font-['Space_Mono'] text-[10px] text-[#5a5a58] px-3 shrink-0 select-none">
+            <span className="font-['Instrument_Sans'] text-[10px] text-[#5a5a58] px-3 shrink-0 select-none">
               /projects/
             </span>
             <input
@@ -320,7 +320,7 @@ export function AdminProjectForm() {
             Drop images or{" "}
             <span className="text-[#C8963E]">click to browse</span>
           </p>
-          <p className="font-['Space_Mono'] text-[8px] tracking-wider text-[#3a3a38]">
+          <p className="font-['Instrument_Sans'] text-[8px] tracking-wider text-[#3a3a38]">
             JPG · PNG · WEBP
           </p>
           <input
@@ -345,7 +345,7 @@ export function AdminProjectForm() {
                   {isCover && (
                     <div className="absolute top-1 left-1 flex items-center gap-1 bg-[#C8963E] px-1.5 py-0.5">
                       <Star size={7} className="fill-[#0A0A09] text-[#0A0A09]" />
-                      <span className="font-['Space_Mono'] text-[6px] text-[#0A0A09]">COVER</span>
+                      <span className="font-['Instrument_Sans'] text-[6px] text-[#0A0A09]">COVER</span>
                     </div>
                   )}
 

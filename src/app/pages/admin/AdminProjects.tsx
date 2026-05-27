@@ -84,7 +84,7 @@ function ProjectRow({
       </div>
 
       {/* Image count badge — tablet+ */}
-      <span className="hidden sm:block font-['Space_Mono'] text-[8px] tracking-wider text-[#4a4a48] shrink-0">
+      <span className="hidden sm:block font-['Instrument_Sans'] text-[8px] tracking-wider text-[#4a4a48] shrink-0">
         {project.images.length} img{project.images.length !== 1 ? "s" : ""}
       </span>
 
@@ -134,7 +134,7 @@ export function AdminProjects() {
         {/* Header */}
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-3">
+            <p className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-3">
               Portfolio
             </p>
             <h1 className="font-['Libre_Bodoni'] italic text-3xl text-[#F0EDE6] font-normal">

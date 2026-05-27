@@ -148,7 +148,7 @@ export function AdminHomeConfig() {
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <p className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-3">
+          <p className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-3">
             Homepage
           </p>
           <h1 className="font-['Libre_Bodoni'] italic text-3xl text-[#F0EDE6] font-normal">
@@ -161,7 +161,7 @@ export function AdminHomeConfig() {
         <div className="flex items-center gap-2 mt-1">
           {saving && <Loader2 size={12} className="text-[#C8963E] animate-spin" />}
           {flashSaved && !saving && (
-            <span className="flex items-center gap-1.5 font-['Space_Mono'] text-[8px] tracking-wider text-green-400">
+            <span className="flex items-center gap-1.5 font-['Instrument_Sans'] text-[8px] tracking-wider text-green-400">
               <Check size={10} /> Saved
             </span>
           )}
@@ -202,7 +202,7 @@ export function AdminHomeConfig() {
             <span className="font-['Instrument_Sans'] text-sm text-[#5a5a58]">
               Drop an image or <span className="text-[#C8963E]">browse</span>
             </span>
-            <span className="font-['Space_Mono'] text-[8px] tracking-wider text-[#3a3a38] ml-auto">JPG · PNG · WEBP</span>
+            <span className="font-['Instrument_Sans'] text-[8px] tracking-wider text-[#3a3a38] ml-auto">JPG · PNG · WEBP</span>
             <input ref={heroRef} type="file" accept="image/*" className="hidden" onChange={handleHeroUpload} />
           </div>
 
@@ -223,7 +223,7 @@ export function AdminHomeConfig() {
             <span className="font-['Instrument_Sans'] text-sm text-[#5a5a58]">
               Drop a video or <span className="text-[#C8963E]">browse</span>
             </span>
-            <span className="font-['Space_Mono'] text-[8px] tracking-wider text-[#3a3a38] ml-auto">MP4 · WEBM · MOV</span>
+            <span className="font-['Instrument_Sans'] text-[8px] tracking-wider text-[#3a3a38] ml-auto">MP4 · WEBM · MOV</span>
             <input ref={videoRef} type="file" accept="video/mp4,video/webm,video/quicktime" className="hidden" onChange={handleVideoUpload} />
           </div>
 
@@ -270,7 +270,7 @@ export function AdminHomeConfig() {
                         <img src={getCoverImage(selected)} alt={selected.name} className="w-full h-full object-cover" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
-                          <span className="font-['Space_Mono'] text-[10px] text-[#2a2a28]">{slot + 1}</span>
+                          <span className="font-['Instrument_Sans'] text-[10px] text-[#2a2a28]">{slot + 1}</span>
                         </div>
                       )}
                     </div>
@@ -336,7 +336,7 @@ export function AdminHomeConfig() {
               ) : (
                 <label className="absolute inset-0 flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-[rgba(240,237,230,0.02)] transition-colors">
                   <Upload size={16} className="text-[#3a3a38]" />
-                  <span className="font-['Space_Mono'] text-[7px] tracking-wider text-[#3a3a38]">Image {idx + 1}</span>
+                  <span className="font-['Instrument_Sans'] text-[7px] tracking-wider text-[#3a3a38]">Image {idx + 1}</span>
                   <input type="file" accept="image/*" className="hidden" onChange={(e) => handleIgUpload(idx, e)} />
                 </label>
               )}

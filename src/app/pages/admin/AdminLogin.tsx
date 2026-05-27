@@ -60,7 +60,7 @@ export function AdminLogin() {
               Lighting
             </span>
           </div>
-          <p className="font-['Space_Mono'] text-[9px] tracking-[0.4em] text-[#6a6460] uppercase mt-4">
+          <p className="font-['Instrument_Sans'] text-[9px] tracking-[0.4em] text-[#6a6460] uppercase mt-4">
             Admin portal
           </p>
         </div>

@@ -100,7 +100,7 @@ export function AdminContent() {
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <p className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-3">
+          <p className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-3">
             Content
           </p>
           <h1 className="font-['Libre_Bodoni'] italic text-3xl text-[#F0EDE6] font-normal">
@@ -112,7 +112,7 @@ export function AdminContent() {
         </div>
         <div className="flex items-center gap-4">
           {flashSaved && (
-            <span className="flex items-center gap-1.5 font-['Space_Mono'] text-[8px] tracking-wider text-green-400">
+            <span className="flex items-center gap-1.5 font-['Instrument_Sans'] text-[8px] tracking-wider text-green-400">
               <Check size={10} /> Saved
             </span>
           )}
@@ -159,7 +159,7 @@ export function AdminContent() {
             <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
               {draft.home.services.map((s, i) => (
                 <div key={i} className="bg-[#0d0d0c] border border-[rgba(240,237,230,0.06)] p-6" style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  <p className="font-['Space_Mono'] text-[8px] tracking-[0.3em] text-[#C8963E] uppercase">
+                  <p className="font-['Instrument_Sans'] text-[8px] tracking-[0.3em] text-[#C8963E] uppercase">
                     {String(i + 1).padStart(2, "0")}
                   </p>
                   <Field label="Title" value={s.title} onChange={(v) => setHomeService(i, { title: v })} />
@@ -208,7 +208,7 @@ export function AdminContent() {
             <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
               {draft.studio.processSteps.map((s, i) => (
                 <div key={i} className="bg-[#0d0d0c] border border-[rgba(240,237,230,0.06)] p-6" style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  <p className="font-['Space_Mono'] text-[8px] tracking-[0.3em] text-[#C8963E] uppercase">
+                  <p className="font-['Instrument_Sans'] text-[8px] tracking-[0.3em] text-[#C8963E] uppercase">
                     Step {String(i + 1).padStart(2, "0")}
                   </p>
                   <Field label="Title" value={s.title} onChange={(v) => setProcessStep(i, { title: v })} />
@@ -223,7 +223,7 @@ export function AdminContent() {
             <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
               {draft.studio.disciplines.map((s, i) => (
                 <div key={i} className="bg-[#0d0d0c] border border-[rgba(240,237,230,0.06)] p-6" style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  <p className="font-['Space_Mono'] text-[8px] tracking-[0.3em] text-[#C8963E] uppercase">
+                  <p className="font-['Instrument_Sans'] text-[8px] tracking-[0.3em] text-[#C8963E] uppercase">
                     {String(i + 1).padStart(2, "0")}
                   </p>
                   <Field label="Title" value={s.title} onChange={(v) => setDiscipline(i, { title: v })} />
@@ -238,7 +238,7 @@ export function AdminContent() {
             <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
               {draft.studio.awards.map((a, i) => (
                 <div key={i} className="bg-[#0d0d0c] border border-[rgba(240,237,230,0.06)] p-5">
-                  <p className="font-['Space_Mono'] text-[8px] tracking-[0.3em] text-[#C8963E] uppercase mb-4">
+                  <p className="font-['Instrument_Sans'] text-[8px] tracking-[0.3em] text-[#C8963E] uppercase mb-4">
                     Award {i + 1}
                   </p>
                   <div className="grid grid-cols-2 gap-4">

@@ -106,7 +106,7 @@ export function Team() {
         <div className="relative z-10 max-w-[1600px] mx-auto site-px">
           <div className="flex items-center gap-3 mb-8 reveal">
             <div className="w-6 bg-[#C8963E]" style={{ height: "1.5px" }} />
-            <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
+            <span className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
               The Studio
             </span>
           </div>
@@ -143,7 +143,7 @@ export function Team() {
             <div className="lg:col-span-4 reveal-left">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-6 bg-[#C8963E]" style={{ height: "1.5px" }} />
-                <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
+                <span className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
                   How we work
                 </span>
               </div>
@@ -158,7 +158,7 @@ export function Team() {
                   key={i}
                   className={`flex items-start gap-10 pb-10 mb-10 border-b border-[rgba(240,237,230,0.06)] last:border-0 last:mb-0 last:pb-0 delay-${(i + 1) * 100}`}
                 >
-                  <span className="font-['Space_Mono'] text-[9px] text-[#C8963E] mt-1 shrink-0 tracking-wider">
+                  <span className="font-['Instrument_Sans'] text-[9px] text-[#C8963E] mt-1 shrink-0 tracking-wider">
                     {v.num}
                   </span>
                   <div>

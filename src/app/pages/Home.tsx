@@ -94,7 +94,7 @@ function Hero() {
 
         <div className="mt-16 flex items-center gap-3 opacity-30">
           <ChevronDown size={13} className="text-[#a09880] animate-bounce" />
-          <span className="font-['Space_Mono'] text-[8px] tracking-[0.4em] text-[#6a6460] uppercase">
+          <span className="font-['Instrument_Sans'] text-[8px] tracking-[0.4em] text-[#6a6460] uppercase">
             Scroll
           </span>
         </div>
@@ -108,7 +108,7 @@ function ProjectOverlay({ p, large }: { p: Project; large?: boolean }) {
     <>
       <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A09]/80 via-[#0A0A09]/10 to-transparent" />
       <div className={`absolute ${large ? "top-7 left-8" : "top-5 left-6"}`}>
-        <span className="font-['Space_Mono'] text-[8px] tracking-[0.3em] uppercase text-white/60">
+        <span className="font-['Instrument_Sans'] text-[8px] tracking-[0.3em] uppercase text-white/60">
           {p.category}
         </span>
       </div>
@@ -116,7 +116,7 @@ function ProjectOverlay({ p, large }: { p: Project; large?: boolean }) {
         <h3 className={`font-['Libre_Bodoni'] italic font-normal text-white leading-tight mb-2 ${large ? "text-4xl lg:text-5xl" : "text-2xl"}`}>
           {p.name}
         </h3>
-        <p className="font-['Space_Mono'] text-[8px] tracking-[0.25em] uppercase text-white/50">
+        <p className="font-['Instrument_Sans'] text-[8px] tracking-[0.25em] uppercase text-white/50">
           {p.location}
         </p>
       </div>
@@ -249,7 +249,7 @@ function FeaturedProjects() {
               <div>
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-5 bg-[#C8963E]" style={{ height: "1.5px" }} />
-                  <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
+                  <span className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
                     Selected Work
                   </span>
                 </div>
@@ -290,7 +290,7 @@ function Services() {
           <div className="lg:col-span-4 reveal-left">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-5 bg-[#C8963E]" style={{ height: "1.5px" }} />
-              <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
+              <span className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
                 Disciplines
               </span>
             </div>
@@ -305,7 +305,7 @@ function Services() {
                 key={i}
                 className={`flex items-start gap-10 py-10 border-b border-[rgba(240,237,230,0.06)] last:border-0 delay-${(i + 1) * 100}`}
               >
-                <span className="font-['Space_Mono'] text-[8px] text-[#C8963E] mt-1 shrink-0">
+                <span className="font-['Instrument_Sans'] text-[8px] text-[#C8963E] mt-1 shrink-0">
                   {item.num}
                 </span>
                 <div>
@@ -383,7 +383,7 @@ function InstagramGrid() {
       >
         <div className="flex items-center gap-3 mb-10 reveal">
           <div className="w-5 bg-[#C8963E]" style={{ height: "1.5px" }} />
-          <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
+          <span className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
             Studio
           </span>
         </div>

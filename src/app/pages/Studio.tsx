@@ -28,7 +28,7 @@ function NumberedList({ items }: { items: Array<{ title: string; desc: string }>
           key={i}
           className="flex items-start gap-8 py-9 border-b border-[rgba(240,237,230,0.06)] group"
         >
-          <span className="font-['Space_Mono'] text-[9px] text-[#C8963E] mt-1 shrink-0 tracking-wider w-6">
+          <span className="font-['Instrument_Sans'] text-[9px] text-[#C8963E] mt-1 shrink-0 tracking-wider w-6">
             {String(i + 1).padStart(2, "0")}
           </span>
           <div className="flex-1 min-w-0">
@@ -63,7 +63,7 @@ export function Studio() {
         <div className="relative z-10 max-w-[1600px] mx-auto site-px">
           <div className="flex items-center gap-3 mb-8 reveal">
             <div className="w-6 bg-[#C8963E]" style={{ height: "1.5px" }} />
-            <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
+            <span className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
               The Studio
             </span>
           </div>
@@ -92,7 +92,7 @@ export function Studio() {
             <div className="lg:col-span-4 reveal-left">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-5 bg-[#C8963E]" style={{ height: "1.5px" }} />
-                <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
+                <span className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
                   About us
                 </span>
               </div>
@@ -125,7 +125,7 @@ export function Studio() {
             <div className="lg:col-span-4 reveal-left">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-5 bg-[#C8963E]" style={{ height: "1.5px" }} />
-                <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
+                <span className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
                   Our Process
                 </span>
               </div>
@@ -160,7 +160,7 @@ export function Studio() {
             <div className="lg:col-span-4 reveal-left">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-5 bg-[#C8963E]" style={{ height: "1.5px" }} />
-                <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
+                <span className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
                   Disciplines
                 </span>
               </div>
@@ -183,7 +183,7 @@ export function Studio() {
         >
           <div className="flex items-center gap-3 mb-14 reveal">
             <div className="w-5 bg-[#C8963E]" style={{ height: "1.5px" }} />
-            <span className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
+            <span className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase">
               Awards
             </span>
           </div>
@@ -195,7 +195,7 @@ export function Studio() {
                 className="reveal flex items-center gap-6 py-5"
               >
                 {/* Year */}
-                <span className="font-['Space_Mono'] text-[10px] text-[#3a3a38] w-8 shrink-0">
+                <span className="font-['Instrument_Sans'] text-[10px] text-[#3a3a38] w-8 shrink-0">
                   {a.year}
                 </span>
 
@@ -205,7 +205,7 @@ export function Studio() {
                     {a.name}
                   </p>
                   {a.sub && (
-                    <p className="font-['Space_Mono'] text-[9px] tracking-[0.2em] uppercase text-[#4a4a48] mt-1">
+                    <p className="font-['Instrument_Sans'] text-[9px] tracking-[0.2em] uppercase text-[#4a4a48] mt-1">
                       {a.sub}
                     </p>
                   )}
@@ -213,7 +213,7 @@ export function Studio() {
 
                 {/* Result badge */}
                 <span
-                  className={`font-['Space_Mono'] text-[9px] tracking-[0.25em] uppercase shrink-0 px-3 py-1.5 border ${
+                  className={`font-['Instrument_Sans'] text-[9px] tracking-[0.25em] uppercase shrink-0 px-3 py-1.5 border ${
                     a.result === "Winner"
                       ? "text-[#C8963E] border-[#C8963E]/30 bg-[rgba(200,150,62,0.06)]"
                       : a.result === "Finalist"

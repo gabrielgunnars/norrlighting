@@ -59,7 +59,7 @@ function PhotoUpload({
             <p className="font-['Instrument_Sans'] text-xs text-[#5a5a58]">
               Drop photo or <span className="text-[#C8963E]">browse</span>
             </p>
-            <p className="font-['Space_Mono'] text-[8px] tracking-wider text-[#3a3a38]">JPG · PNG · WEBP</p>
+            <p className="font-['Instrument_Sans'] text-[8px] tracking-wider text-[#3a3a38]">JPG · PNG · WEBP</p>
           </div>
         )}
         <input
@@ -191,7 +191,7 @@ export function AdminTeam() {
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <p className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-2">
+          <p className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-2">
             Studio
           </p>
           <h1 className="font-['Libre_Bodoni'] italic text-3xl text-[#F0EDE6] font-normal">
@@ -278,7 +278,7 @@ export function AdminTeam() {
                   <h3 className="font-['Instrument_Sans'] text-sm font-medium text-[#F0EDE6] mb-0.5">
                     {m.name}
                   </h3>
-                  <p className="font-['Space_Mono'] text-[8px] tracking-[0.2em] uppercase text-[#C8963E] mb-2">
+                  <p className="font-['Instrument_Sans'] text-[8px] tracking-[0.2em] uppercase text-[#C8963E] mb-2">
                     {m.role}
                   </p>
                   <p className="font-['Instrument_Sans'] text-xs font-light text-[#6a6460] leading-relaxed line-clamp-2">

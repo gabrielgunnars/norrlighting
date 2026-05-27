@@ -36,7 +36,7 @@ export function AdminImages() {
   return (
     <div className="space-y-8">
       <div>
-        <p className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-3">
+        <p className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-3">
           Media
         </p>
         <h1 className="font-['Libre_Bodoni'] italic text-3xl text-[#F0EDE6] font-normal">
@@ -56,7 +56,7 @@ export function AdminImages() {
             </p>
           </div>
           {saved && (
-            <span className="flex items-center gap-1.5 font-['Space_Mono'] text-[8px] tracking-wider text-green-400">
+            <span className="flex items-center gap-1.5 font-['Instrument_Sans'] text-[8px] tracking-wider text-green-400">
               <Check size={10} /> Saved
             </span>
           )}

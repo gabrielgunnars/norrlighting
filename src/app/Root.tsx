@@ -134,7 +134,7 @@ export function Root() {
                 animation: "loadingPulse 1.4s ease-in-out infinite",
               }}
             />
-            <span className="font-['Space_Mono'] text-[7px] tracking-[0.4em] uppercase text-[#3a3a38]">
+            <span className="font-['Instrument_Sans'] text-[7px] tracking-[0.4em] uppercase text-[#3a3a38]">
               Loading
             </span>
           </div>
@@ -153,7 +153,7 @@ export function Root() {
           <div className="flex items-center gap-3">
             <span className="font-['Libre_Bodoni'] text-base tracking-[0.08em] text-[#4a4a48] uppercase">NORR</span>
             <span className="w-px h-3 bg-[#C8963E]/40" />
-            <span className="font-['Space_Mono'] text-[7px] tracking-[0.2em] text-[#2e2e2c] uppercase">© 2026 Norrlighting ehf. · Reykjavík</span>
+            <span className="font-['Instrument_Sans'] text-[7px] tracking-[0.2em] text-[#2e2e2c] uppercase">© 2026 Norrlighting ehf. · Reykjavík</span>
           </div>
           <a href="mailto:info@norrlighting.is" className="font-['Instrument_Sans'] text-[11px] font-light text-[#3a3a38] hover:text-[#6a6460] transition-colors">
             info@norrlighting.is

@@ -20,7 +20,7 @@ export function AdminDashboard() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "3.5rem" }}>
       <div>
-        <p className="font-['Space_Mono'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-3">
+        <p className="font-['Instrument_Sans'] text-[9px] tracking-[0.35em] text-[#C8963E] uppercase mb-3">
           Overview
         </p>
         <h1 className="font-['Libre_Bodoni'] italic text-3xl text-[#F0EDE6] font-normal">
@@ -104,7 +104,7 @@ export function AdminDashboard() {
                     {[p.category, p.year].filter(Boolean).join(" · ")}
                   </p>
                 </div>
-                <span className="font-['Space_Mono'] text-[8px] tracking-wider text-green-400 bg-green-400/10 px-2 py-0.5">
+                <span className="font-['Instrument_Sans'] text-[8px] tracking-wider text-green-400 bg-green-400/10 px-2 py-0.5">
                   Published
                 </span>
               </Link>
