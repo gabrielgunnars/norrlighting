@@ -335,41 +335,40 @@ function AwardsSection() {
         <p className="font-['Space_Mono'] text-[8px] tracking-[0.35em] text-[#C8963E] uppercase mb-8">
           Recognition
         </p>
-        <div
-          className="grid"
-          style={{ gridTemplateColumns: `repeat(${Math.min(awards.length, 4)}, 1fr)` }}
-        >
+        <div className="divide-y divide-[rgba(240,237,230,0.06)]">
           {awards.map((award, i) => (
             <div
               key={award.id}
-              className="reveal flex flex-col justify-between py-2"
-              style={{
-                paddingLeft: i === 0 ? 0 : "2rem",
-                paddingRight: i === awards.length - 1 ? 0 : "2rem",
-                borderLeft: i === 0 ? "none" : "1px solid rgba(240,237,230,0.07)",
-                transitionDelay: `${i * 60}ms`,
-              }}
+              className="reveal flex items-center gap-6 py-4"
+              style={{ transitionDelay: `${i * 50}ms` }}
             >
-              <div>
-                <p className="font-['Space_Mono'] text-[8px] tracking-[0.3em] uppercase text-[#4a4a48] mb-4 leading-relaxed">
-                  {award.name}
+              {/* Name */}
+              <p className="font-['Instrument_Sans'] text-[15px] font-light text-[#F0EDE6] flex-1 min-w-0">
+                {award.name}
+              </p>
+
+              {/* Subtext */}
+              {award.subtext && (
+                <p className="font-['Space_Mono'] text-[9px] tracking-[0.2em] uppercase text-[#4a4a48] hidden sm:block shrink-0">
+                  {award.subtext}
                 </p>
-                <h3 className="font-['Libre_Bodoni'] italic text-[clamp(1.4rem,2.2vw,2.2rem)] text-[#F0EDE6] font-normal leading-[1.05]">
-                  {award.result || "Winner"}
-                </h3>
-                {award.subtext && (
-                  <p className="font-['Space_Mono'] text-[8px] tracking-[0.25em] uppercase text-[#4a4a48] mt-3 leading-relaxed">
-                    {award.subtext}
-                  </p>
-                )}
-              </div>
-              <div className="w-6 bg-[#C8963E] mt-6" style={{ height: "1.5px" }} />
+              )}
+
+              {/* Result badge */}
+              <span
+                className={`font-['Space_Mono'] text-[9px] tracking-[0.25em] uppercase shrink-0 px-3 py-1.5 border ${
+                  (award.result || "Winner") === "Winner"
+                    ? "text-[#C8963E] border-[#C8963E]/30 bg-[rgba(200,150,62,0.06)]"
+                    : (award.result || "Winner") === "Finalist"
+                    ? "text-[#a09880] border-[rgba(240,237,230,0.12)] bg-[rgba(240,237,230,0.03)]"
+                    : "text-[#6a6460] border-[rgba(240,237,230,0.08)] bg-transparent"
+                }`}
+              >
+                {award.result || "Winner"}
+              </span>
             </div>
           ))}
         </div>
-        <p className="font-['Instrument_Sans'] text-sm font-light text-[#4a4a48] mt-10 text-center leading-relaxed">
-          Internationally recognized for atmospheric lighting in Icelandic nature and architectural environments.
-        </p>
       </div>
     </section>
   );
