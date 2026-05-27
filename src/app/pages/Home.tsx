@@ -455,6 +455,7 @@ export function Home() {
     <>
       <Hero />
       <AwardsSection />
+      <FeaturedProjects />
       <Services />
       <InstagramGrid />
       <CTA />
